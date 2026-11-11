@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="studio-key" content="__KEY__"><title>ACP Studio · Local Desktop</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body><header><div class="brand"><b>ACP</b><div><h1>Studio</h1><span>LOCAL DESKTOP · IROH / QUIC</span></div></div><div id="status">正在启动</div></header>
+<main><section class="pair"><div><h2>连接 App</h2><p>Debug → ACP Studio → 粘贴配对 JSON → 连接。<br>无需 BFF、Relay 或已登录账号。</p><button id="copy">复制配对 JSON</button></div><pre id="pairing">等待 iroh 端点…</pre></section>
+<section class="bar"><label>方法 <select id="method" aria-label="ACP 方法"></select></label><label>响应模式 <select id="mode"><option value="mock">Desktop 样例 Mock</option><option value="replay">按方法 JSON / 历史回放</option></select></label><label>回放速度 <select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="0">即时</option></select></label><span id="notice">所有方法交互会自动录制</span><button id="import">导入 JSON / 调试文档</button><input id="file" type="file" accept=".json,.txt" hidden><button id="export">导出 JSON</button><button id="apply" class="primary">应用到该方法</button><button id="reset">恢复该方法默认</button></section>
+<section class="bar"><label>通知样例 <select id="sample" aria-label="通知样例"><option value="">选择真实通知</option></select></label><button id="load-sample">载入通知</button><label>连接 <select id="connection" aria-label="目标连接"></select></label><label>会话 <select id="session" aria-label="目标会话"></select></label><button id="notify">发送编辑器通知</button></section>
+<div class="workspace"><aside><h2>历史回放</h2><div id="records"></div><p>点击记录载入编辑器。<br>各方法规则独立保存。<br>回放模式下未配置的方法仍由 Mock 处理。</p></aside><article><h2>请求响应 / 通知脚本 <span id="script-method">session/prompt</span></h2><textarea id="editor" spellcheck="false" aria-label="回复 JSON"></textarea><p>$rpcId 对应当前请求；$sessionId 对应当前会话；$params.xxx 读取请求参数；$result 和 $notifications 使用当前 Mock 状态。支持响应前后通知。独立通知不含响应。</p></article><article><h2>双向 ACP 消息 <span id="count">0</span></h2><div id="events"></div></article></div>
+<details><summary>Desktop 记录导入报告</summary><pre id="sources"></pre></details>
+<footer>本地测试电脑 · 配对信息每次启动更换 · 配置、会话与队列为本地模拟状态；工具通知只展示，不执行命令</footer></main></body></html>

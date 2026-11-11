@@ -1,0 +1,4554 @@
+[
+  {
+    "source": "_agnes:unstable:remote:capabilities:list.json",
+    "requests": [
+      {
+        "id": "2FF367D0-7A69-4C69-A36C-BBB9D085A622",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/remote/capabilities/list",
+        "params": {}
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "2FF367D0-7A69-4C69-A36C-BBB9D085A622",
+        "result": {
+          "plugins": [
+            {
+              "id": "extension:agnes_aigc",
+              "name": "agnes_aigc",
+              "label": "Agnes AIGC",
+              "description": "Generate Agnes AI media assets from prompts"
+            },
+            {
+              "id": "extension:agnes_artifacts",
+              "name": "agnes_artifacts",
+              "label": "Artifacts",
+              "description": "Register and present user-facing session artifacts"
+            },
+            {
+              "id": "extension:agnes_research",
+              "name": "agnes_research",
+              "label": "Agnes Research",
+              "description": "Write Agnes research reports and manifests into workspace artifacts"
+            },
+            {
+              "id": "extension:agnes_slide",
+              "name": "agnes_slide",
+              "label": "Agnes Slide",
+              "description": "Create HTML slide decks, keep slide sources organized, preview decks, and export PDF/PPTX"
+            },
+            {
+              "id": "extension:agnes_web_search",
+              "name": "agnes_web_search",
+              "label": "Agnes Web Search",
+              "description": "Search the web, images, Wikipedia, and Wikidata using configured providers plus no-key sources"
+            },
+            {
+              "id": "extension:agnescodedocs",
+              "name": "Agnes Code Docs",
+              "label": "Agnes Code Docs",
+              "description": "GitMCP for Agnes Code documentation"
+            },
+            {
+              "id": "extension:analyze",
+              "name": "analyze",
+              "label": "Analyze",
+              "description": "Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs"
+            },
+            {
+              "id": "extension:developer",
+              "name": "developer",
+              "label": "Developer",
+              "description": "Write and edit files, and execute shell commands"
+            },
+            {
+              "id": "extension:extensionmanager",
+              "name": "Extension Manager",
+              "label": "Extension Manager",
+              "description": "Enable extension management tools for discovering, enabling, and disabling extensions"
+            },
+            {
+              "id": "extension:pdfreader",
+              "name": "PDF Reader",
+              "label": "PDF Reader",
+              "description": "Read large and complex PDF documents"
+            },
+            {
+              "id": "extension:playwright",
+              "name": "Playwright",
+              "label": "Playwright",
+              "description": "Interact with web pages through structured accessibility snapshots using Playwright"
+            },
+            {
+              "id": "extension:skills",
+              "name": "skills",
+              "label": "Skills",
+              "description": "Discover and provide skill instructions from filesystem and builtins"
+            },
+            {
+              "id": "extension:summon",
+              "name": "summon",
+              "label": "Summon",
+              "description": "Load knowledge and delegate tasks to subagents"
+            },
+            {
+              "id": "extension:todo",
+              "name": "todo",
+              "label": "Todo",
+              "description": "Enable a todo list for Agnes so it can keep track of what it is doing"
+            },
+            {
+              "id": "extension:tom",
+              "name": "tom",
+              "label": "Top Of Mind",
+              "description": "Inject custom context into every turn via AGNES_MOIM_MESSAGE_TEXT and AGNES_MOIM_MESSAGE_FILE environment variables"
+            }
+          ],
+          "connectors": [
+            {
+              "id": "connector:feishu",
+              "name": "feishu",
+              "label": "飞书",
+              "description": "Operate Feishu IM, docs, calendar, sheets, base, and more through the official Feishu CLI Skills and a user-owned enterprise app",
+              "extensionIds": [
+                "extension:feishu"
+              ],
+              "authState": "unknown"
+            }
+          ],
+          "skills": [
+            {
+              "name": "agnes-aigc",
+              "description": "Route Agnes image/video generation or editing requests (生图、改图、文生图、图生图、文生视频、图生视频) to the matching AIGC skill.",
+              "descriptionZh": "想生成图片、编辑照片，还是制作 AI 视频？只需描述你的创作想法，即可智能识别需求，匹配文生图、图生图、文生视频或图生视频等创作流程。支持使用 Agnes 内置 AIGC 能力，也可根据你的设置选择其他生成服务，让图片与视频创作更加便捷。",
+              "sourceType": "builtinSkill"
+            },
+            {
+              "name": "agnes-doc-guide",
+              "description": "Use for Agnes recipes, extensions, sessions, providers, syntax, or commands. Read the relevant docs first; do not guess fields or syntax.",
+              "descriptionZh": "Agnes 功能不会用、配置不知道怎么写？帮你查找并解读官方文档，提供 Recipes、Extensions、Sessions、Providers 等功能的使用指导，辅助理解命令语法、配置参数及操作示例。无论是学习 Agnes 功能，还是解决使用与配置中的疑问，都能更快找到可靠的参考依据。",
+              "sourceType": "builtinSkill"
+            },
+            {
+              "name": "agnes-sheet-author",
+              "description": "Create or analyze spreadsheets, CSV/Excel, workbooks, tables, dashboards, data cleaning, or search-to-table reports.",
+              "descriptionZh": "表格制作、数据整理与分析，一站式搞定！支持创建和分析 Excel、CSV 等电子表格，完成数据清洗、信息整理、重复数据处理、业务数据分析及仪表盘制作，还能将搜索结果或多份资料整理成结构化表格与报告。帮助你统一数据口径、追溯信息来源、发现关键业务信息，让数据处理和分析更高效。",
+              "sourceType": "builtinSkill"
+            },
+            {
+              "name": "commit-helper",
+              "description": "分析 Git 改动并生成符合 Conventional Commits 规范的 Commit Message。Use when the user asks to write a commit message, generate commit, or says 帮我写提交信息/生成 commit/message.",
+              "sourceType": "skill"
+            },
+            {
+              "name": "env-setup",
+              "description": "检查项目依赖和环境配置，给出安装和初始化指导。Use when the user sets up a new project, checks environment dependencies, says 环境配置/搭建环境/check环境/setup or wants to verify installed tools.",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-approval",
+              "description": "飞书审批：查询和处理审批待办/已办/实例，搜索可发起审批定义、查看定义详情并发起原生审批实例。当用户要处理审批任务、查看审批实例、搜索或发起审批时使用。审批待办不是飞书任务；非审批类待办走 lark-task。不负责创建审批定义；三方审批定义不走原生提单。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-apps",
+              "description": "妙搭（Spark/Miaoda）应用开发与托管：应用创建、本地全栈开发、云端生成迭代、创意设计（UI mockup / 可交互原型 / 线框图 / 落地页 / 仪表盘 / 幻灯片 deck / 视觉探索）、AI相关能力和飞书平台能力或者其他外部能力集成、日志/Trace/监控指标/PV/UV 查询、环境变量管理、应用协作者与协作权限设置、应用角色与成员管理、自动化触发器（定时/记录变更/Webhook/飞书审批）。当用户要开发/新建一个系统·工具·平台·应用，或要本地开发 / 云端开发 / 修改 / 部署 / 发布 / 上线 / 拿可分享链接，或用 HTML 做页面·网站·部署到妙搭，或要设计 / design / mockup / prototype / wireframe / 做 PPT / deck / 视觉探索，或提到妙搭/Spark/Miaoda（应用运行时域名形如 *.aiforce.cloud）、应用数据库、应用文件存储、开放 API Key、可见范围、应用协作者/开发权限、应用角色/角色成员、线上日志、接口请求量、错误量、延迟、访问量、环境变量、给妙搭应用配自动化任务/定时触发/审批通过后自动触发时使用。不负责普通云盘文件上传（lark-drive）、飞书文档编辑（lark-doc）、原生幻灯片创建（lark-slides）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-attendance",
+              "description": "飞书考勤打卡：查询自己的考勤打卡记录",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-base",
+              "description": "飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitable 或 /base/ 链接时使用。文件导入/导出转 lark-drive，认证/授权转 lark-shared。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-calendar",
+              "description": "飞书日历：管理日历日程和会议室。查看/搜索日程、创建/更新日程、管理参会人、查询忙闲和推荐时段、预定会议室。当用户需要查看日程安排、创建/修改会议、查询/预定会议室时使用。不负责：查询过去的视频会议记录（走 lark-vc）、待办任务（走 lark-task）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-contact",
+              "description": "飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名,以及按关键词搜索当前用户可见的机器人 / 智能体(agent)。当用户提到一个名字要下一步发消息 / 排日程,或拿到 open_id 想查具体信息时使用。不负责部门树遍历、按部门列员工、组织架构图,这类需求走原生 OpenAPI。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-doc",
+              "description": "飞书云文档（Docx / Wiki）内容操作：读取、创建、编辑文档，插入或下载图片附件，以及操作思维笔记。用户提供文档 URL/token（包括 doubao.com 的 /docx/、/wiki/）时使用；按 URL 路径/token 而非域名路由。文档内嵌资源按读取参考中的统一规则分流。文档评论走 lark-drive；表格或 Base 内部数据操作不在本 skill。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-drive",
+              "description": "飞书云空间（云盘/云存储）：管理 Drive 文件和文件夹，包含上传/下载、创建文件夹、复制/移动/删除、查看元数据、查询权限设置、评论/权限/订阅、标题、版本、飞书文档密级标签（secure labels）和本地文件导入。用户需要整理云盘目录、处理云空间资源 URL/token、判断链接类型/真实 token/标题，或导入 Word/Markdown/Excel/CSV/PPTX/.base 为 docx/sheet/bitable/slides 时使用；doubao.com 云空间 URL/token 也按资源路径和 token 路由，不回退 WebFetch。不负责：文档内容编辑（走 lark-doc）、表格/Base 表内数据操作（走 lark-sheets/lark-base）、知识空间节点/成员管理（走 lark-wiki）、原生 Markdown 文件读写/patch/diff（走 lark-markdown）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-event",
+              "description": "Lark/Feishu real-time event listening / subscribing / consuming: stream events as NDJSON via `lark-cli event consume <EventKey>` (covers IM messages/reactions/chat changes, Approval status changes, Task updates, VC meeting started/joined/ended, Minutes generated, Whiteboard updated, etc.). Use for Lark bots, real-time message processing, long-running subscribers, streaming webhook/push handlers. Supports `--max-events` / `--timeout` bounded runs and a stderr ready-marker contract — designed for AI agents running as subprocesses.",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-im",
+              "description": "飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件、管理表情回复、发送应用内/短信/电话加急、发送和处理交互卡片（Interactive Card）、监听卡片按钮回调（card.action.trigger）。当用户需要发消息、查看或搜索聊天记录、下载聊天中的文件、查看群成员、搜索群、创建群聊或话题群、管理标记数据、管理 Feed 置顶（添加/移除/查询置顶会话）、管理标签数据、处理卡片回调时使用。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-mail",
+              "description": "飞书邮箱：Use when user mentions 起草邮件、写邮件、草稿、发送/回复/转发邮件、查阅邮件、看邮件、搜索邮件、邮件文件夹、邮件标签、邮件联系人、监听新邮件、邮件收信规则等；use for mail/email intent only. Do not use for docs/sheets/calendar/auth setup/pure contact lookup/IM chat tasks.",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-markdown",
+              "description": "飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较差异时使用。不负责将 Markdown 导入为飞书在线文档，也不负责文件搜索、权限、评论、移动、删除等云空间管理操作。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-minutes",
+              "description": "飞书妙记：搜索妙记、查看妙记基础信息、下载/上传音视频、读取或编辑妙记的产物内容、改标题、替换说话人/关键词、申请妙记查看/编辑权限。当给出minute_token、本地音视频文件，要查/改/转妙记产物，或用户明确要主动申请妙记权限时使用；本地音视频转纪要/逐字稿优先走本 skill，不要用 ffmpeg/whisper 本地转写。不负责：获取会议关联妙记，或仅按自然语言标题定位纪要",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-note",
+              "description": "飞书会议纪要（Note）直查：已知 note_id 时查询纪要详情、展示类型、关联文档 token，并读取 unified 原始逐字记录。当用户已持有 note_id，或从文档显式 vc-node-id 获得 note_id 时使用。不负责会议/日程/妙记定位、文档标题搜索或 Docx 正文读取。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-okr",
+              "description": "飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标、关键结果、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看对齐关系时使用。不负责：待办任务管理（lark-task）、日程/会议安排（lark-calendar）、绩效评估",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-openapi-explorer",
+              "description": "飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill 或 lark-cli 已注册命令满足，需要查找并调用原生飞书 OpenAPI 时使用。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-shared",
+              "description": "Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identity, business-domain permissions (--domain, including all/docs/drive), missing scopes, revoking authorization, or handling _notice JSON.",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-sheets",
+              "description": "飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替换、多操作批量更新，以及图表、透视表、条件格式、筛选器、迷你图、浮动图片等对象的创建与维护。当用户需要创建电子表格、管理工作表、批量读写或编辑数据、统计汇总与可视化、表格美化、公式计算（含 Excel 公式迁移）、金融/财务建模（DCF、三张表、预算、Sensitivity 等）等任务时使用。若用户是想按名称或关键词搜索云空间（云盘/云存储）里的表格文件，请改用 lark-drive 的 drive +search 先定位资源。当用户给出 doubao.com 的 /sheets/ URL/token 时，也应直接使用本 skill，不要因为域名不是飞书而回退到 WebFetch；路由依据是 URL 路径模式和 token，而不是域名。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-skill-maker",
+              "description": "创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-slides",
+              "description": "飞书幻灯片：创建和编辑幻灯片。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。当用户给出 doubao.com 的 /slides/ URL/token 时，也应直接使用本 skill，不要因为域名不是飞书而回退到 WebFetch；路由依据是 URL 路径模式和 token，而不是域名。不负责：云文档内容编辑（走 lark-doc）、云文档里的独立画板对象（走 lark-whiteboard）、上传或下载普通文件（走 lark-drive）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-task",
+              "description": "飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能体的主页数据、写入智能体任务记录。当用户需要创建待办事项、查看任务列表、跟踪任务进度、管理项目清单或给他人分配任务、为任务上传附件文件、注册注销任务智能体、更新智能体主页数据、写入任务记录时使用。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-vc",
+              "description": "飞书视频会议：搜索历史会议记录、查询会议纪要（总结/待办/章节/逐字稿）、查询参会人快照。当用户查询已结束的会议、获取会议产物（纪要/妙记）、查看参会人时使用；查询未来日程走 lark-calendar。不负责：Agent 真实入会/离会、会中实时事件（走 lark-vc-agent）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-vc-agent",
+              "description": "飞书视频会议会中能力：用于让应用机器人真实加入或离开正在进行的会议，并读取当前身份可见的会中事件、发送会中文本消息或会中表情。适用于用户询问正在开的会议发生了什么、谁在发言、是否共享内容，或需要发现当前可读的进行中会议 ID。不负责已结束会议搜索、参会人快照、纪要、逐字稿或录制查询，这些使用 lark-vc 技能。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-whiteboard",
+              "description": "飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用多种格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板时使用此 skill。不负责：飞书云文档内容编辑（lark-doc）、文档内嵌电子表格/Base（lark-sheets / lark-base）。\n",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-wiki",
+              "description": "飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或创建文档、浏览知识空间结构、查看或管理空间成员、移动或复制节点时使用。当用户给出 doubao.com 的 /wiki/ URL/token 时，也应直接使用本 skill，不要因为域名不是飞书而回退到 WebFetch；路由依据是 URL 路径模式和 token，而不是域名。不负责：上传文件到知识库节点下（走 lark-drive）、编辑文档/表格/Base 内容（走 lark-doc / lark-sheets / lark-base）。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-workflow-meeting-summary",
+              "description": "会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "lark-workflow-standup-report",
+              "description": "日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的安排。",
+              "sourceType": "skill"
+            },
+            {
+              "name": "skill-creator",
+              "description": "Create or save reusable skills, or turn a workflow into a skill. Load this before create_skill.",
+              "descriptionZh": "把你的工作经验变成可以反复使用的 AI 技能！无论是重复性的办公任务、专业操作流程，还是精心设计的提示词，都能帮你梳理技能的触发条件、执行步骤、输入参数和异常处理方式，并创建、保存为可复用的 Skill。让常用工作流程沉淀成随时可调用的专属能力。",
+              "sourceType": "builtinSkill"
+            },
+            {
+              "name": "xmind-file",
+              "description": "Create official Xmind cloud maps through the connected Remote MCP, and create validated local .xmind files through the Agnes-managed Xmind CLI. Never fake a .xmind ZIP or reuse cloud OAuth tokens for CLI login.",
+              "descriptionZh": "有想法却不知道怎么整理？只需提供主题和内容提纲，即可生成结构清晰、层级分明的 XMind 思维导图。支持通过已连接的 XMind 服务创建云端导图及分享链接，也可生成并校验本地 .xmind 文件。适用于头脑风暴、知识梳理、项目规划、学习笔记及方案设计。",
+              "sourceType": "builtinSkill"
+            }
+          ]
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:remote:models:list.json",
+    "requests": [
+      {
+        "id": "E5BA0C3D-FB60-4767-930D-AD1A2395F714",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/remote/models/list",
+        "params": {}
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "E5BA0C3D-FB60-4767-930D-AD1A2395F714",
+        "result": {
+          "models": [
+            {
+              "providerId": "agnes",
+              "modelId": "auto",
+              "name": "auto",
+              "source": "builtin",
+              "description": "自动选择最适合当前任务的模型。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 512000,
+              "maxOutputTokens": 65536,
+              "settings": null,
+              "allowedSubscriptions": [],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": null,
+              "pointsCostMultiplier": null,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "agnes-3.0-flash",
+              "name": "agnes-3.0-flash",
+              "source": "builtin",
+              "description": "推理更强，执行更稳。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 512000,
+              "maxOutputTokens": 65536,
+              "settings": null,
+              "allowedSubscriptions": [],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 0,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "agnes-2.5-flash",
+              "name": "agnes-2.5-flash",
+              "source": "builtin",
+              "description": "速度与能力更均衡，适合复杂任务。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 512000,
+              "maxOutputTokens": 65536,
+              "settings": null,
+              "allowedSubscriptions": [],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 0,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "agnes-2.5-pro",
+              "name": "agnes-2.5-pro",
+              "source": "builtin",
+              "description": "面向下一代 AI Agent 的旗舰推理模型",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 65536,
+              "settings": null,
+              "allowedSubscriptions": [],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 1,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "deepseek-v4-flash",
+              "name": "deepseek-v4-flash",
+              "source": "builtin",
+              "description": "",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 393216,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 1.2,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "deepseek-v4.1-flash",
+              "name": "deepseek-v4.1-flash",
+              "source": "builtin",
+              "description": "DeepSeek 最新高效模型1017版本，强化复杂编程与完整项目开发，任务执行更快、更省成本。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 393216,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 0.3,
+              "displayLabel": "限时优惠"
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "glm-5.3",
+              "name": "glm-5.3",
+              "source": "builtin",
+              "description": "新一代开源旗舰模型，擅长复杂编程与长程智能体任务。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 131072,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": null,
+              "pointsCostMultiplier": 2.2,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "glm-5.2",
+              "name": "glm-5.2",
+              "source": "builtin",
+              "description": "擅长中文理解、推理和编程。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 131072,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": null,
+              "pointsCostMultiplier": 1.85,
+              "displayLabel": "限时折扣"
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "kimi-k3",
+              "name": "kimi-k3",
+              "source": "builtin",
+              "description": "擅长长上下文推理、编程和智能体任务。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1048576,
+              "maxOutputTokens": 131072,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": null,
+              "pointsCostMultiplier": 4.8,
+              "displayLabel": ""
+            },
+            {
+              "providerId": "agnes",
+              "modelId": "deepseek-v4-pro",
+              "name": "deepseek-v4-pro",
+              "source": "builtin",
+              "description": "擅长编程、数学和深度推理。",
+              "configured": true,
+              "available": true,
+              "contextLimit": 1000000,
+              "maxOutputTokens": 393216,
+              "settings": null,
+              "allowedSubscriptions": [
+                "Starter",
+                "Plus",
+                "Pro"
+              ],
+              "isGray": false,
+              "grayAvailable": true,
+              "thinkingToggleDefault": true,
+              "pointsCostMultiplier": 1.5,
+              "displayLabel": ""
+            }
+          ],
+          "defaultModel": {
+            "providerId": "agnes",
+            "modelId": "auto"
+          },
+          "builtinError": null,
+          "customError": null
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:remote:projects:list.json",
+    "requests": [
+      {
+        "id": "85B8C168-F1D8-412C-8071-E6D8D6F5E7DA",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/remote/projects/list",
+        "params": {}
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "85B8C168-F1D8-412C-8071-E6D8D6F5E7DA",
+        "result": {
+          "projects": [
+            {
+              "id": "workspace:/Users/tzz/Desktop/TestProject",
+              "path": "/Users/tzz/Desktop/TestProject",
+              "name": "TestProject",
+              "pinned": false,
+              "createdAt": "2026-10-27T01:20:37.900Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Documents/家庭/孩子/学校/天小/三上/科创逐梦活动",
+              "path": "/Users/tzz/Documents/家庭/孩子/学校/天小/三上/科创逐梦活动",
+              "name": "科创逐梦活动",
+              "pinned": false,
+              "createdAt": "2026-10-19T01:36:22.400Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter",
+              "path": "/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter",
+              "name": "AITrackerFlutter",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:32:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/work/KiwiProjects/AgnesCN",
+              "path": "/Users/tzz/Developer/work/KiwiProjects/AgnesCN",
+              "name": "AgnesCN",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:31:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/clients/NEOECO/AITracker",
+              "path": "/Users/tzz/Developer/clients/NEOECO/AITracker",
+              "name": "AITracker",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:25:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/research/goose",
+              "path": "/Users/tzz/Developer/research/goose",
+              "name": "goose",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:34:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/work/KiwiProjects/agnes-code",
+              "path": "/Users/tzz/Developer/work/KiwiProjects/agnes-code",
+              "name": "agnes-code",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:33:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/work/KiwiProjects/SharedKit",
+              "path": "/Users/tzz/Developer/work/KiwiProjects/SharedKit",
+              "name": "SharedKit",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:30:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/work/KiwiProjects/Echo",
+              "path": "/Users/tzz/Developer/work/KiwiProjects/Echo",
+              "name": "Echo",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:29:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/work/KiwiProjects/Agnes",
+              "path": "/Users/tzz/Developer/work/KiwiProjects/Agnes",
+              "name": "Agnes",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:28:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/personal/sandbox/MarkdownKit",
+              "path": "/Users/tzz/Developer/personal/sandbox/MarkdownKit",
+              "name": "MarkdownKit",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:27:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz/Developer/research/uPic",
+              "path": "/Users/tzz/Developer/research/uPic",
+              "name": "uPic",
+              "pinned": false,
+              "createdAt": "2026-10-08T07:26:47.499Z"
+            },
+            {
+              "id": "workspace:/Users/tzz",
+              "path": "/Users/tzz",
+              "name": "tzz",
+              "pinned": false,
+              "createdAt": "2026-10-19T01:33:22.400Z"
+            }
+          ],
+          "temporaryWorkingDir": "/Users/tzz/.agnes/temporary"
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:remote:session:modes:get.json",
+    "requests": [
+      {
+        "id": "F8CCD5A5-0377-4BAE-9227-1943859DC54D",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/remote/session/modes/get",
+        "params": {
+          "sessionId": "20261029_8"
+        }
+      },
+      {
+        "id": "F8CCD5A5-0377-4BAE-9227-1943859DC54D",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/remote/session/modes/get",
+        "params": {}
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "F8CCD5A5-0377-4BAE-9227-1943859DC54D",
+        "result": {
+          "modes": {
+            "currentModeId": "smart_approve",
+            "availableModes": [
+              {
+                "id": "approve",
+                "name": "approve",
+                "description": "Ask before every tool call"
+              },
+              {
+                "id": "smart_approve",
+                "name": "smart_approve",
+                "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+              },
+              {
+                "id": "auto",
+                "name": "auto",
+                "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:history:load.json",
+    "requests": [
+      {
+        "id": "5ABECCFD-AD99-44A7-AFAE-96E3A127FD6F",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/history/load",
+        "params": {
+          "cursor": "eyJzZXNzaW9uX2lkIjoiMjAyNjEwMTVfNSIsImJlZm9yZV9tZXNzYWdlX2lkIjoibXNnXzAxYTEzZTU2LWY4ZjgtNzQ2ZC04MjI0LWMzODk3YTM0Y2Q5ZSJ9",
+          "limit": 10,
+          "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+          "sessionId": "20261015_5"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "5ABECCFD-AD99-44A7-AFAE-96E3A127FD6F",
+        "result": {
+          "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+          "nextCursor": "eyJzZXNzaW9uX2lkIjoiMjAyNjEwMTVfNSIsImJlZm9yZV9tZXNzYWdlX2lkIjoibXNnXzAxYTEzZTQ4LTNiZjUtNzE0ZS05ZDM5LWE2YWUwMzA5MjJlZiJ9",
+          "hasMore": true,
+          "returnedMessages": 11,
+          "totalVisibleMessages": 67,
+          "updateCount": 15,
+          "messageUsages": [
+            {
+              "messageId": "202610151438054766e982436946f1",
+              "usage": {
+                "inputTokens": 49531,
+                "outputTokens": 1280,
+                "totalTokens": 50811,
+                "cacheReadTokens": 48000,
+                "cost": 0.0077754,
+                "costSource": "provider_reported",
+                "elapsedMs": 21551,
+                "timeToFirstTokenMs": 3433,
+                "isCompaction": false
+              }
+            },
+            {
+              "messageId": "20261015144532a78b92ae92ca4018",
+              "usage": {
+                "inputTokens": 50994,
+                "outputTokens": 609,
+                "totalTokens": 51603,
+                "cacheReadTokens": 49472,
+                "cost": 0.004810399999999999,
+                "costSource": "provider_reported",
+                "elapsedMs": 11574,
+                "timeToFirstTokenMs": 4483,
+                "isCompaction": false
+              }
+            },
+            {
+              "messageId": "20261015144543ce10fc0281ed476b",
+              "usage": {
+                "inputTokens": 51307,
+                "outputTokens": 208,
+                "totalTokens": 51515,
+                "cacheReadTokens": 50944,
+                "cost": 0.0014234,
+                "costSource": "provider_reported",
+                "elapsedMs": 14272,
+                "timeToFirstTokenMs": 14155,
+                "isCompaction": false
+              }
+            },
+            {
+              "messageId": "202610151445571d4696788d144555",
+              "usage": {
+                "inputTokens": 51842,
+                "outputTokens": 520,
+                "totalTokens": 52362,
+                "cacheReadTokens": 51264,
+                "cost": 0.0030972,
+                "costSource": "provider_reported",
+                "elapsedMs": 9623,
+                "timeToFirstTokenMs": 2744,
+                "isCompaction": false
+              }
+            },
+            {
+              "messageId": "2026101514492308c733e596004ec3",
+              "usage": {
+                "inputTokens": 52415,
+                "outputTokens": 901,
+                "totalTokens": 53316,
+                "cacheReadTokens": 51840,
+                "cost": 0.0047694,
+                "costSource": "provider_reported",
+                "elapsedMs": 15924,
+                "timeToFirstTokenMs": 3822,
+                "isCompaction": false
+              }
+            }
+          ],
+          "messageModels": [
+            {
+              "messageId": "202610151438054766e982436946f1",
+              "modelId": "glm-5.2"
+            },
+            {
+              "messageId": "20261015144532a78b92ae92ca4018",
+              "modelId": "glm-5.2"
+            },
+            {
+              "messageId": "msg_96a725dc-7f85-48ae-ad61-58ab48c85643",
+              "modelId": "glm-5.2"
+            },
+            {
+              "messageId": "20261015144543ce10fc0281ed476b",
+              "modelId": "glm-5.2"
+            },
+            {
+              "messageId": "202610151445571d4696788d144555",
+              "modelId": "glm-5.2"
+            },
+            {
+              "messageId": "2026101514492308c733e596004ec3",
+              "modelId": "glm-5.2"
+            }
+          ],
+          "promptRequests": [
+            {
+              "requestId": "01a13e48-3c3c-754f-8086-a939723ffe2f",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+              "status": "completed",
+              "runId": "run_ad4144bf-1a87-47a9-aab8-951007bd12e5",
+              "stopReason": "end_turn",
+              "createdAt": 1792046283,
+              "updatedAt": 1792046305,
+              "submittedAtMs": 1792046283000,
+              "startedAtMs": 1792046283937,
+              "finishedAtMs": 1792046305584,
+              "elapsedMs": 22584
+            },
+            {
+              "requestId": "01a13e4f-0cc5-72ac-8681-cbb6bd712bb3",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e4f-0c79-769c-b852-34ad2d5e3162",
+              "status": "completed",
+              "runId": "run_837a3333-e028-4f4d-b7a9-4921dbb243f8",
+              "stopReason": "end_turn",
+              "createdAt": 1792046730,
+              "updatedAt": 1792046766,
+              "submittedAtMs": 1792046730000,
+              "startedAtMs": 1792046730602,
+              "finishedAtMs": 1792046766231,
+              "elapsedMs": 36231
+            },
+            {
+              "requestId": "01a13e52-951c-70c6-86f4-574c2b25712e",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e52-94c4-73a9-951e-804ef48b1ef7",
+              "status": "completed",
+              "runId": "run_f52d90c0-c1d1-428f-b0f7-18550132ffe1",
+              "stopReason": "end_turn",
+              "createdAt": 1792046961,
+              "updatedAt": 1792046978,
+              "submittedAtMs": 1792046961000,
+              "startedAtMs": 1792046962113,
+              "finishedAtMs": 1792046978143,
+              "elapsedMs": 17143
+            }
+          ]
+        }
+      }
+    ],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 0,
+            "update": {
+              "sessionUpdate": "user_message_chunk",
+              "content": {
+                "type": "text",
+                "text": "Google Play Console中如何添加aab",
+                "_meta": {
+                  "agnes": {
+                    "requestId": "01a13e48-3c3c-754f-8086-a939723ffe2f",
+                    "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+                    "created": 1792046283
+                  }
+                }
+              },
+              "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+              "_meta": {
+                "agnes": {
+                  "created": 1792046283,
+                  "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 1,
+            "update": {
+              "sessionUpdate": "agent_thought_chunk",
+              "content": {
+                "type": "text",
+                "text": "The user is asking how to add/upload an AAB file in Google Play Console. This is a knowledge/instructional question, not a coding task. I should provide a clear, step-by-step guide on how to upload an AAB to Google Play Console."
+              },
+              "messageId": "202610151438054766e982436946f1",
+              "_meta": {
+                "agnes": {
+                  "created": 1792046287,
+                  "messageId": "202610151438054766e982436946f1"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 14,
+            "update": {
+              "sessionUpdate": "agent_message_chunk",
+              "content": {
+                "type": "text",
+                "text": "代码不需要改动——你的代码已经全部使用 `com.neoeco.tech.Duolnk`（小写 L）。\n\n**问题出在 Google Play Console 端**：你在创建应用时把包名填成了 `DuoInk`（大写 I），需要改成与代码一致的 `Duolnk`。\n\n## 解决方法\n\n### Google Play Console 中包名不可修改\n\nGoogle Play Console 中应用的包名一旦创建就**无法修改**。你需要：\n\n1. **在 Play Console 中新建一个应用**\n2. 创建时包名填写：`com.neoeco.tech.Duolnk`（注意是小写 **L**）\n\n### 具体步骤\n\n1. 打开 [Google Play Console](https://play.google.com/console)\n2. 点击右上角 **「创建应用」**（Create app）\n3. 填写信息：\n   - **应用名称**：`Tracker Show`（或你想要的名称）\n   - **默认语言**：中文（或你需要的市场语言）\n   - **应用类型**：应用\n   - **付费/免费**：免费\n   - **声明**：勾选相关声明\n4. 点击 **「创建应用」**\n5. 进入新应用后，重新走内部测试 → 上传 AAB 流程\n\n> 原来那个 `DuoInk` 的应用可以不管它，它的包名会永久占用，但不影响你用 `Duolnk` 创建新应用。\n\n### 如何避免再次填错\n\n这两个字符在输入时很容易混淆：\n\n```\n正确：Duolnk  → D u o l(L) n k\n错误：DuoInk  → D u o I(i大写) n k\n```\n\n建议直接复制粘贴这个包名：\n\n```\ncom.neoeco.tech.Duolnk\n```\n\n---\n\n创建新应用后重新上传你的 `app-release.aab` 即可，代码和构建产物都不需要任何改动。"
+              },
+              "messageId": "2026101514492308c733e596004ec3",
+              "_meta": {
+                "agnes": {
+                  "created": 1792046966,
+                  "messageId": "2026101514492308c733e596004ec3"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 8,
+            "update": {
+              "sessionUpdate": "tool_call",
+              "toolCallId": "01a13e4f68ac29eca06df5d56aee081d",
+              "title": "shell · # 检查代码中其他引用 Duolnk 的地方…",
+              "rawInput": {
+                "command": "# 检查代码中其他引用 Duolnk 的地方\ngrep -rn \"Duolnk\\|DuoInk\" /Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/ --include=\"*.kts\" --include=\"*.gradle\" --include=\"*.xml\" --include=\"*.kt\" --include=\"*.java\" --include=\"*.properties\" 2>/dev/null\necho \"===\"\ngrep -rn \"Duolnk\\|DuoInk\" /Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/lib/ 2>/dev/null\necho \"===\"\ngrep -rn \"Duolnk\\|DuoInk\" /Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/ --include=\"*.swift\" --include=\"*.plist\" --include=\"*.pbxproj\" 2>/dev/null"
+              },
+              "_meta": {
+                "goose": {
+                  "toolCall": {
+                    "toolName": "shell"
+                  }
+                },
+                "agnes": {
+                  "created": 1792046756,
+                  "messageId": "20261015144543ce10fc0281ed476b"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 9,
+            "update": {
+              "sessionUpdate": "tool_call_update",
+              "toolCallId": "01a13e4f68ac29eca06df5d56aee081d",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "content",
+                  "content": {
+                    "type": "text",
+                    "text": "/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/build.gradle.kts:32:    namespace = \"com.neoeco.tech.Duolnk\"\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/build.gradle.kts:46:        applicationId = \"com.neoeco.tech.Duolnk\"\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/src/main/kotlin/com/neoeco/tech/aitracker_flutter/MainActivity.kt:1:package com.neoeco.tech.Duolnk\n===\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/lib/core/services/version_check_service.dart:229:  static const String _androidPackageName = 'com.neoeco.tech.Duolnk';\n===\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:503:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:687:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:711:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;"
+                  }
+                }
+              ],
+              "rawOutput": {
+                "stdout": "/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/build.gradle.kts:32:    namespace = \"com.neoeco.tech.Duolnk\"\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/build.gradle.kts:46:        applicationId = \"com.neoeco.tech.Duolnk\"\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/android/app/src/main/kotlin/com/neoeco/tech/aitracker_flutter/MainActivity.kt:1:package com.neoeco.tech.Duolnk\n===\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/lib/core/services/version_check_service.dart:229:  static const String _androidPackageName = 'com.neoeco.tech.Duolnk';\n===\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:503:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:687:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;\n/Users/tzz/Developer/clients/NEOECO/AITrackerFlutter/ios/Runner.xcodeproj/project.pbxproj:711:\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.neoeco.tech.Duolnk;",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "_meta": {
+                "agnes": {
+                  "created": 1792046756,
+                  "messageId": "msg_ceef48c9-0937-42b4-a4f0-c174b428f924"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "保留说明来源；跳过 1 个非 JSON-RPC 元数据片段。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:info.json",
+    "requests": [
+      {
+        "id": "074A143A-7C89-4D40-B639-E9F79129D2E6",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/info",
+        "params": {
+          "sessionId": "20261028_3"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "074A143A-7C89-4D40-B639-E9F79129D2E6",
+        "result": {
+          "session": {
+            "sessionId": "20261028_3",
+            "cwd": "/Users/tzz/.agnes/temporary/2026-10-28/20261028_3/work",
+            "title": "New Chat",
+            "updatedAt": "2026-10-28T01:47:50+00:00",
+            "_meta": {
+              "messageCount": 0,
+              "createdAt": "2026-10-28T01:47:50Z",
+              "userSetName": false,
+              "sessionType": "user",
+              "hasRecipe": false,
+              "isTemporary": true,
+              "providerId": "agnes",
+              "modelId": "auto",
+              "modelConfig": {
+                "model_name": "auto",
+                "context_limit": 512000,
+                "temperature": null,
+                "max_tokens": 65536,
+                "toolshim": false,
+                "toolshim_model": null,
+                "reasoning": false
+              },
+              "agnes": {
+                "readState": {
+                  "activityVersion": 0,
+                  "readVersion": 0,
+                  "hasUnreadActivity": false
+                },
+                "isPinned": false,
+                "activeRunId": null
+              }
+            }
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:mark_read.json",
+    "requests": [
+      {
+        "id": "DB537C81-5165-44AA-BBE0-3BB8A1C8645D",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/mark_read",
+        "params": {
+          "contentFingerprint": "4ec2976ec71742375fd7186f23781499f08a20bf0daf863a5fe3ec0ed15fda08",
+          "messageId": "480dd357b7074d34a01f02c969c13ed1",
+          "sessionId": "20261028_3",
+          "throughVersion": 1
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "DB537C81-5165-44AA-BBE0-3BB8A1C8645D",
+        "result": {
+          "activityVersion": 1,
+          "readVersion": 1,
+          "hasUnreadActivity": false,
+          "messageId": "480dd357b7074d34a01f02c969c13ed1",
+          "contentFingerprint": "4ec2976ec71742375fd7186f23781499f08a20bf0daf863a5fe3ec0ed15fda08"
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:prompt:enqueue.json",
+    "requests": [
+      {
+        "id": "291F7471-86E7-49A8-9EAE-AD2FC00C8953",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/prompt/enqueue",
+        "params": {
+          "createdAt": 1793183437,
+          "messageId": "C19E5E5D-AA97-467C-887B-B1F731741841",
+          "prompt": [
+            {
+              "_meta": {
+                "agnes": {
+                  "created": 1793183437,
+                  "mentions": [
+                    {
+                      "id": "extension:agnes_aigc",
+                      "insertText": "@Agnes AIGC ",
+                      "kind": "plugin",
+                      "label": "Agnes AIGC"
+                    }
+                  ],
+                  "messageId": "C19E5E5D-AA97-467C-887B-B1F731741841",
+                  "requestId": "F2BD5D5E-AE79-419F-9ADF-A747896D42EA"
+                }
+              },
+              "text": "$commit-helper @Agnes AIGC 这是啥",
+              "type": "text"
+            },
+            {
+              "name": "c58b0815e8eea49dbfd893e9fc8e328b7cfcb055e7ec9401254a86cb1039f223.jpg",
+              "type": "resource_link",
+              "uri": "agnes-remote-upload:361b1e0d-f13d-4137-8bb7-19a85a973681"
+            }
+          ],
+          "requestId": "F2BD5D5E-AE79-419F-9ADF-A747896D42EA",
+          "retry": false,
+          "sessionId": "20261028_13"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "AA7F574C-314B-4D75-8928-77BFE3F2FCED",
+        "result": {
+          "entry": {
+            "requestId": "94C45443-1E2B-4228-B7EE-B83A7E620D92",
+            "sessionId": "20261028_3",
+            "messageId": "D1992772-109D-471A-B23C-25F209ADB2F7",
+            "status": "queued",
+            "createdAt": 1793152074,
+            "updatedAt": 1793152074,
+            "submittedAtMs": 1793152074000
+          }
+        }
+      }
+    ],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "prompt_queue_update",
+            "entry": {
+              "requestId": "EC4A21FA-A3F5-4605-919C-D731ECF50BA1",
+              "sessionId": "20261028_5",
+              "messageId": "F0AD04F2-8151-4816-A20A-175B29723C99",
+              "status": "queued",
+              "createdAt": 1793171383,
+              "updatedAt": 1793171383,
+              "submittedAtMs": 1793171383000
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_6",
+          "update": {
+            "sessionUpdate": "session_info_update",
+            "title": "帮我制定一份减脂计划包含适量的居家锻炼，输出pdf打印版",
+            "updatedAt": "2026-10-28T08:00:14+00:00",
+            "_meta": {
+              "messageCount": 0,
+              "userSetName": false,
+              "workingDir": "/Users/tzz/Desktop/TestProject"
+            }
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "请求与响应 ID 不完全配对；按方法制作样例，不当成原始完整事务。",
+      "混有多个会话；通知须按场景选择，不能推断为同一次调用。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:prompt:list.json",
+    "requests": [
+      {
+        "id": "5FD82DDB-F10F-4611-B08F-8DC748C2B4BF",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/prompt/list",
+        "params": {
+          "sessionId": "20261015_5"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "5FD82DDB-F10F-4611-B08F-8DC748C2B4BF",
+        "result": {
+          "entries": [
+            {
+              "requestId": "01a13e34-79fe-768e-a900-d171a0547a6b",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e34-79c7-7704-b4e4-b7f48f21b7e8",
+              "status": "completed",
+              "runId": "run_ef8329fe-34c3-4d34-a838-704518f966b1",
+              "stopReason": "end_turn",
+              "createdAt": 1792044988,
+              "updatedAt": 1792045017,
+              "submittedAtMs": 1792044988000,
+              "startedAtMs": 1792044989062,
+              "finishedAtMs": 1792045017589,
+              "elapsedMs": 29589
+            },
+            {
+              "requestId": "01a13e44-2dff-72e8-8037-caf156c736a6",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e44-2db3-743c-90ea-1e12852dade2",
+              "status": "completed",
+              "runId": "run_9e008d22-059b-4cdf-9ca6-a32a94013d02",
+              "stopReason": "end_turn",
+              "createdAt": 1792046017,
+              "updatedAt": 1792046160,
+              "submittedAtMs": 1792046017000,
+              "startedAtMs": 1792046018274,
+              "finishedAtMs": 1792046160298,
+              "elapsedMs": 143298
+            },
+            {
+              "requestId": "01a13e48-3c3c-754f-8086-a939723ffe2f",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+              "status": "completed",
+              "runId": "run_ad4144bf-1a87-47a9-aab8-951007bd12e5",
+              "stopReason": "end_turn",
+              "createdAt": 1792046283,
+              "updatedAt": 1792046305,
+              "submittedAtMs": 1792046283000,
+              "startedAtMs": 1792046283937,
+              "finishedAtMs": 1792046305584,
+              "elapsedMs": 22584
+            },
+            {
+              "requestId": "01a13e4f-0cc5-72ac-8681-cbb6bd712bb3",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e4f-0c79-769c-b852-34ad2d5e3162",
+              "status": "completed",
+              "runId": "run_837a3333-e028-4f4d-b7a9-4921dbb243f8",
+              "stopReason": "end_turn",
+              "createdAt": 1792046730,
+              "updatedAt": 1792046766,
+              "submittedAtMs": 1792046730000,
+              "startedAtMs": 1792046730602,
+              "finishedAtMs": 1792046766231,
+              "elapsedMs": 36231
+            },
+            {
+              "requestId": "01a13e52-951c-70c6-86f4-574c2b25712e",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e52-94c4-73a9-951e-804ef48b1ef7",
+              "status": "completed",
+              "runId": "run_f52d90c0-c1d1-428f-b0f7-18550132ffe1",
+              "stopReason": "end_turn",
+              "createdAt": 1792046961,
+              "updatedAt": 1792046978,
+              "submittedAtMs": 1792046961000,
+              "startedAtMs": 1792046962113,
+              "finishedAtMs": 1792046978143,
+              "elapsedMs": 17143
+            },
+            {
+              "requestId": "01a13e56-f952-7633-b07c-54f2b5d2800a",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e56-f8f8-746d-8224-c3897a34cd9e",
+              "status": "completed",
+              "runId": "run_03ceb319-de58-46ed-90d3-22f196665907",
+              "stopReason": "end_turn",
+              "createdAt": 1792047249,
+              "updatedAt": 1792047275,
+              "submittedAtMs": 1792047249000,
+              "startedAtMs": 1792047249916,
+              "finishedAtMs": 1792047275214,
+              "elapsedMs": 26214
+            },
+            {
+              "requestId": "01a13e58-2f74-775d-a035-0438fb8d18ae",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e58-2f24-7490-8997-9dc4acd53b4d",
+              "status": "completed",
+              "runId": "run_b0ee614f-0063-41aa-94eb-2ddd3b354445",
+              "stopReason": "end_turn",
+              "createdAt": 1792047329,
+              "updatedAt": 1792047352,
+              "submittedAtMs": 1792047329000,
+              "startedAtMs": 1792047329322,
+              "finishedAtMs": 1792047352754,
+              "elapsedMs": 23754
+            },
+            {
+              "requestId": "01a13e62-2a4d-7458-8fd5-c941db8a84cf",
+              "sessionId": "20261015_5",
+              "messageId": "msg_01a13e62-29f1-726b-a94b-d3aa562afc8a",
+              "status": "completed",
+              "runId": "run_8c33b4cd-e8bd-4a14-a615-f86c5a349090",
+              "stopReason": "end_turn",
+              "createdAt": 1792047983,
+              "updatedAt": 1792048011,
+              "submittedAtMs": 1792047983000,
+              "startedAtMs": 1792047983351,
+              "finishedAtMs": 1792048011442,
+              "elapsedMs": 28442
+            }
+          ]
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:read_state.json",
+    "requests": [
+      {
+        "id": "EAFBF017-9B20-4816-BE8B-EB11A3029F4B",
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/read_state",
+        "params": {
+          "sessionId": "20261028_3"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "EAFBF017-9B20-4816-BE8B-EB11A3029F4B",
+        "result": {
+          "activityVersion": 0,
+          "readVersion": 0,
+          "hasUnreadActivity": false,
+          "messageId": null,
+          "contentFingerprint": null
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "_agnes:unstable:session:update.json",
+    "requests": [],
+    "responses": [],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "extension_load_progress",
+            "loadId": "7c8ae38f-b513-411d-ab0b-95cbeb553373",
+            "sequence": 0,
+            "event": {
+              "phase": "started",
+              "total": 19,
+              "extensions": [
+                {
+                  "key": "agnes_aigc",
+                  "name": "agnes_aigc",
+                  "index": 0
+                },
+                {
+                  "key": "analyze",
+                  "name": "analyze",
+                  "index": 1
+                },
+                {
+                  "key": "summon",
+                  "name": "summon",
+                  "index": 2
+                },
+                {
+                  "key": "todo",
+                  "name": "todo",
+                  "index": 3
+                },
+                {
+                  "key": "agnes_artifacts",
+                  "name": "agnes_artifacts",
+                  "index": 4
+                },
+                {
+                  "key": "extensionmanager",
+                  "name": "Extension Manager",
+                  "index": 5
+                },
+                {
+                  "key": "skills",
+                  "name": "skills",
+                  "index": 6
+                },
+                {
+                  "key": "developer",
+                  "name": "developer",
+                  "index": 7
+                },
+                {
+                  "key": "agnes_slide",
+                  "name": "agnes_slide",
+                  "index": 8
+                },
+                {
+                  "key": "agnes_research",
+                  "name": "agnes_research",
+                  "index": 9
+                },
+                {
+                  "key": "agnes_web_search",
+                  "name": "agnes_web_search",
+                  "index": 10
+                },
+                {
+                  "key": "tom",
+                  "name": "tom",
+                  "index": 11
+                },
+                {
+                  "key": "scheduler",
+                  "name": "scheduler",
+                  "index": 12
+                },
+                {
+                  "key": "agnescodedocs",
+                  "name": "Agnes Code Docs",
+                  "index": 13
+                },
+                {
+                  "key": "pdfreader",
+                  "name": "PDF Reader",
+                  "index": 14
+                },
+                {
+                  "key": "playwright",
+                  "name": "Playwright",
+                  "index": 15
+                },
+                {
+                  "key": "agnes_xmind",
+                  "name": "agnes_xmind",
+                  "index": 16
+                },
+                {
+                  "key": "github",
+                  "name": "GitHub",
+                  "index": 17
+                },
+                {
+                  "key": "feishu",
+                  "name": "Feishu",
+                  "index": 18
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "extension_load_progress",
+            "loadId": "0b7e9412-8386-47f7-9f94-cf1de12d4510",
+            "sequence": 1,
+            "event": {
+              "phase": "extension",
+              "total": 19,
+              "completed": 0,
+              "extension": {
+                "key": "agnes_aigc",
+                "name": "agnes_aigc",
+                "index": 0
+              },
+              "status": "loading"
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "extension_load_progress",
+            "loadId": "0b7e9412-8386-47f7-9f94-cf1de12d4510",
+            "sequence": 2,
+            "event": {
+              "phase": "extension",
+              "total": 19,
+              "completed": 0,
+              "extension": {
+                "key": "analyze",
+                "name": "analyze",
+                "index": 1
+              },
+              "status": "loading"
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "extension_load_progress",
+            "loadId": "0b7e9412-8386-47f7-9f94-cf1de12d4510",
+            "sequence": 18,
+            "event": {
+              "phase": "extension",
+              "total": 19,
+              "completed": 8,
+              "extension": {
+                "key": "analyze",
+                "name": "analyze",
+                "index": 1
+              },
+              "status": "success",
+              "elapsedMs": 28
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "usage_update",
+            "used": 0,
+            "contextLimit": 512000,
+            "accumulatedInputTokens": 0,
+            "accumulatedOutputTokens": 0,
+            "accumulatedTotalTokens": 0,
+            "accumulatedCacheReadTokens": 0,
+            "accumulatedCacheWriteTokens": 0
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "prompt_queue_update",
+            "entry": {
+              "requestId": "94C45443-1E2B-4228-B7EE-B83A7E620D92",
+              "sessionId": "20261028_3",
+              "messageId": "D1992772-109D-471A-B23C-25F209ADB2F7",
+              "status": "queued",
+              "createdAt": 1793152074,
+              "updatedAt": 1793152074,
+              "submittedAtMs": 1793152074000
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "message_usage",
+            "messageId": "480dd357b7074d34a01f02c969c13ed1",
+            "usage": {
+              "inputTokens": 34602,
+              "outputTokens": 128,
+              "totalTokens": 34730,
+              "cacheReadTokens": 5632,
+              "elapsedMs": 17729,
+              "timeToFirstTokenMs": 16421,
+              "isCompaction": false
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261015_5",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "4A3B1C8C-7CDD-4B56-AD99-AE0980E582BC",
+            "sequence": 0,
+            "update": {
+              "sessionUpdate": "user_message_chunk",
+              "content": {
+                "type": "text",
+                "text": "Google Play Console中如何添加aab",
+                "_meta": {
+                  "agnes": {
+                    "requestId": "01a13e48-3c3c-754f-8086-a939723ffe2f",
+                    "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+                    "created": 1792046283
+                  }
+                }
+              },
+              "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef",
+              "_meta": {
+                "agnes": {
+                  "created": 1792046283,
+                  "messageId": "msg_01a13e48-3bf5-714e-9d39-a6ae030922ef"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "混有多个会话；通知须按场景选择，不能推断为同一次调用。"
+    ]
+  },
+  {
+    "source": "initialize.json",
+    "requests": [
+      {
+        "id": "C8DDAC77-6726-475E-8416-F4614B994A35",
+        "jsonrpc": "2.0",
+        "method": "initialize",
+        "params": {
+          "clientCapabilities": {
+            "_meta": {
+              "agnes": {
+                "conversationReplacement": true,
+                "customNotifications": true,
+                "messageLocale": "zh-CN"
+              }
+            }
+          },
+          "clientInfo": {
+            "name": "agnes-ios",
+            "version": "1.0.8"
+          },
+          "protocolVersion": 1
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "C8DDAC77-6726-475E-8416-F4614B994A35",
+        "result": {
+          "protocolVersion": 1,
+          "agentCapabilities": {
+            "loadSession": true,
+            "promptCapabilities": {
+              "image": true,
+              "audio": false,
+              "embeddedContext": true
+            },
+            "mcpCapabilities": {
+              "http": true,
+              "sse": false,
+              "acp": false
+            },
+            "sessionCapabilities": {
+              "list": {},
+              "close": {}
+            },
+            "auth": {},
+            "_meta": {
+              "agnes": {
+                "sessionBatchDelete": {
+                  "version": 1,
+                  "maxBatchSize": 1000,
+                  "scopes": [
+                    "archived",
+                    "unarchived"
+                  ]
+                },
+                "sidebarPins": {
+                  "version": 1
+                },
+                "sidebarGroups": {
+                  "version": 1,
+                  "lazyWorkspaces": true
+                },
+                "sessionToolPermissions": {
+                  "version": 1,
+                  "initialMode": true
+                },
+                "recipeParameterScopes": {},
+                "localInference": {}
+              }
+            }
+          },
+          "authMethods": [
+            {
+              "id": "agnes-provider",
+              "name": "Configure Provider",
+              "description": "Run `agnes configure` to set up your AI provider and API key"
+            }
+          ],
+          "agentInfo": {
+            "name": "agnes",
+            "version": "1.62.6"
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。"
+    ]
+  },
+  {
+    "source": "session:list.json",
+    "requests": [
+      {
+        "id": "9EEE8A6F-E7AD-4C6C-95EF-901C4B2FC06D",
+        "jsonrpc": "2.0",
+        "method": "session/list",
+        "params": {
+          "_meta": {
+            "agnes": {
+              "pinnedFirst": true
+            },
+            "types": [
+              "user",
+              "scheduled",
+              "acp"
+            ]
+          }
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "7D740C40-6048-45E4-9FF1-6928BB6FC9E6",
+        "result": {
+          "sessions": [
+            {
+              "sessionId": "20261008_1",
+              "cwd": "/Users/tzz/.agnes/temporary/2026-10-08/20261008_1/work",
+              "title": "绘画征集标题与内容不一致",
+              "updatedAt": "2026-10-08T05:32:00+00:00",
+              "_meta": {
+                "messageCount": 2,
+                "createdAt": "2026-10-08T05:31:52Z",
+                "lastMessageAt": "2026-10-08T05:32:00Z",
+                "userSetName": false,
+                "sessionType": "user",
+                "hasRecipe": false,
+                "isTemporary": true,
+                "providerId": "agnes",
+                "modelId": "glm-5.2",
+                "modelConfig": {
+                  "model_name": "glm-5.2",
+                  "context_limit": 1000000,
+                  "temperature": null,
+                  "max_tokens": 131072,
+                  "toolshim": false,
+                  "toolshim_model": null
+                },
+                "agnes": {
+                  "readState": {
+                    "activityVersion": 0,
+                    "readVersion": 0,
+                    "hasUnreadActivity": false
+                  },
+                  "isPinned": false
+                }
+              }
+            }
+          ],
+          "_meta": {
+            "agnes": {
+              "pinnedWorkspacePaths": [],
+              "pinRevision": 1
+            }
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "请求与响应 ID 不完全配对；按方法制作样例，不当成原始完整事务。"
+    ]
+  },
+  {
+    "source": "session:load.json",
+    "requests": [
+      {
+        "id": "140F77E7-007F-476D-ADFE-AA9638932474",
+        "jsonrpc": "2.0",
+        "method": "session/load",
+        "params": {
+          "_meta": {
+            "messageLimit": 10
+          },
+          "cwd": "/Users/tzz/Desktop/TestProject",
+          "mcpServers": [],
+          "sessionId": "20261027_3"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "140F77E7-007F-476D-ADFE-AA9638932474",
+        "result": {
+          "modes": {
+            "currentModeId": "auto",
+            "availableModes": [
+              {
+                "id": "auto",
+                "name": "auto",
+                "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+              },
+              {
+                "id": "approve",
+                "name": "approve",
+                "description": "Ask before every tool call"
+              },
+              {
+                "id": "smart_approve",
+                "name": "smart_approve",
+                "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+              },
+              {
+                "id": "plan",
+                "name": "plan",
+                "description": "Explore with verified read-only tools; block all modifying calls"
+              },
+              {
+                "id": "chat",
+                "name": "chat",
+                "description": "Chat only, no tool calls"
+              }
+            ]
+          },
+          "configOptions": [
+            {
+              "id": "provider",
+              "name": "Provider",
+              "type": "select",
+              "currentValue": "agnes",
+              "options": [
+                {
+                  "value": "goose",
+                  "name": "Agnes (Default)"
+                },
+                {
+                  "value": "agnes",
+                  "name": "Agnes"
+                },
+                {
+                  "value": "alibaba",
+                  "name": "Alibaba (Qwen)"
+                },
+                {
+                  "value": "amp-acp",
+                  "name": "Amp"
+                },
+                {
+                  "value": "anthropic",
+                  "name": "Anthropic"
+                },
+                {
+                  "value": "atomic_chat",
+                  "name": "Atomic Chat"
+                },
+                {
+                  "value": "avian",
+                  "name": "Avian"
+                },
+                {
+                  "value": "aws_bedrock",
+                  "name": "Amazon Bedrock"
+                },
+                {
+                  "value": "azure_foundry",
+                  "name": "Azure AI Foundry"
+                },
+                {
+                  "value": "azure_openai",
+                  "name": "Azure OpenAI"
+                },
+                {
+                  "value": "celeris",
+                  "name": "Celeris"
+                },
+                {
+                  "value": "cerebras",
+                  "name": "Cerebras"
+                },
+                {
+                  "value": "chatgpt_codex",
+                  "name": "ChatGPT Codex"
+                },
+                {
+                  "value": "claude-acp",
+                  "name": "Claude Code"
+                },
+                {
+                  "value": "claude-code",
+                  "name": "Claude Code CLI"
+                },
+                {
+                  "value": "codex",
+                  "name": "OpenAI Codex CLI"
+                },
+                {
+                  "value": "codex-acp",
+                  "name": "Codex CLI"
+                },
+                {
+                  "value": "copilot-acp",
+                  "name": "GitHub Copilot CLI (ACP)"
+                },
+                {
+                  "value": "cursor-agent",
+                  "name": "Cursor Agent"
+                },
+                {
+                  "value": "custom_deepseek",
+                  "name": "DeepSeek"
+                },
+                {
+                  "value": "custom_tensorix",
+                  "name": "Tensorix"
+                },
+                {
+                  "value": "databricks",
+                  "name": "Databricks"
+                },
+                {
+                  "value": "databricks_v2",
+                  "name": "Databricks AI Gateway"
+                },
+                {
+                  "value": "empiriolabs",
+                  "name": "EmpirioLabs AI"
+                },
+                {
+                  "value": "fireworks-ai",
+                  "name": "Fireworks AI"
+                },
+                {
+                  "value": "friendli",
+                  "name": "Friendli AI"
+                },
+                {
+                  "value": "futurmix",
+                  "name": "FuturMix"
+                },
+                {
+                  "value": "gcp_vertex_ai",
+                  "name": "GCP Vertex AI"
+                },
+                {
+                  "value": "gemini-cli",
+                  "name": "Gemini CLI"
+                },
+                {
+                  "value": "gemini_oauth",
+                  "name": "Gemini"
+                },
+                {
+                  "value": "github_copilot",
+                  "name": "GitHub Copilot"
+                },
+                {
+                  "value": "google",
+                  "name": "Google Gemini (API Key)"
+                },
+                {
+                  "value": "groq",
+                  "name": "Groq"
+                },
+                {
+                  "value": "huggingface",
+                  "name": "Hugging Face"
+                },
+                {
+                  "value": "iflytek",
+                  "name": "iFlytek Spark"
+                },
+                {
+                  "value": "iflytek_astron",
+                  "name": "iFlytek Astron MaaS"
+                },
+                {
+                  "value": "inception",
+                  "name": "Inception"
+                },
+                {
+                  "value": "kimi_code",
+                  "name": "Kimi Code"
+                },
+                {
+                  "value": "litellm",
+                  "name": "LiteLLM"
+                },
+                {
+                  "value": "llama_swap",
+                  "name": "Llama Swap"
+                },
+                {
+                  "value": "lmstudio",
+                  "name": "LM Studio"
+                },
+                {
+                  "value": "local",
+                  "name": "Local Inference"
+                },
+                {
+                  "value": "meta",
+                  "name": "Meta"
+                },
+                {
+                  "value": "minimax",
+                  "name": "MiniMax"
+                },
+                {
+                  "value": "mistral",
+                  "name": "Mistral AI"
+                },
+                {
+                  "value": "moonshot",
+                  "name": "Moonshot"
+                },
+                {
+                  "value": "nano-gpt",
+                  "name": "NanoGPT"
+                },
+                {
+                  "value": "nearai",
+                  "name": "NEAR AI Cloud"
+                },
+                {
+                  "value": "novita",
+                  "name": "Novita AI"
+                },
+                {
+                  "value": "nvidia",
+                  "name": "NVIDIA"
+                },
+                {
+                  "value": "ollama",
+                  "name": "Ollama"
+                },
+                {
+                  "value": "ollama_cloud",
+                  "name": "Ollama Cloud"
+                },
+                {
+                  "value": "omlx",
+                  "name": "oMLX"
+                },
+                {
+                  "value": "openai",
+                  "name": "OpenAI"
+                },
+                {
+                  "value": "opencode_go",
+                  "name": "OpenCode Go"
+                },
+                {
+                  "value": "openrouter",
+                  "name": "OpenRouter"
+                },
+                {
+                  "value": "orcarouter",
+                  "name": "OrcaRouter"
+                },
+                {
+                  "value": "ovhcloud",
+                  "name": "OVHcloud"
+                },
+                {
+                  "value": "perplexity",
+                  "name": "Perplexity"
+                },
+                {
+                  "value": "pi-acp",
+                  "name": "Pi"
+                },
+                {
+                  "value": "routstr",
+                  "name": "Routstr"
+                },
+                {
+                  "value": "sagemaker_tgi",
+                  "name": "Amazon SageMaker TGI"
+                },
+                {
+                  "value": "sakana",
+                  "name": "Sakana AI"
+                },
+                {
+                  "value": "saladcloud",
+                  "name": "SaladCloud AI Gateway"
+                },
+                {
+                  "value": "scaleway",
+                  "name": "Scaleway"
+                },
+                {
+                  "value": "snowflake",
+                  "name": "Snowflake"
+                },
+                {
+                  "value": "tanzu_ai",
+                  "name": "VMware Tanzu Platform"
+                },
+                {
+                  "value": "tetrate",
+                  "name": "Tetrate Agent Router Service"
+                },
+                {
+                  "value": "together",
+                  "name": "Together AI"
+                },
+                {
+                  "value": "venice",
+                  "name": "Venice.ai"
+                },
+                {
+                  "value": "vercel_ai_gateway",
+                  "name": "Vercel AI Gateway"
+                },
+                {
+                  "value": "xai",
+                  "name": "xAI"
+                },
+                {
+                  "value": "xai_oauth",
+                  "name": "xAI (SuperGrok Subscription)"
+                },
+                {
+                  "value": "zai",
+                  "name": "Z.AI"
+                },
+                {
+                  "value": "zhipu",
+                  "name": "Zhipu AI"
+                }
+              ]
+            },
+            {
+              "id": "mode",
+              "name": "Mode",
+              "category": "mode",
+              "type": "select",
+              "currentValue": "auto",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto",
+                  "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+                },
+                {
+                  "value": "approve",
+                  "name": "approve",
+                  "description": "Ask before every tool call"
+                },
+                {
+                  "value": "smart_approve",
+                  "name": "smart_approve",
+                  "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+                },
+                {
+                  "value": "plan",
+                  "name": "plan",
+                  "description": "Explore with verified read-only tools; block all modifying calls"
+                },
+                {
+                  "value": "chat",
+                  "name": "chat",
+                  "description": "Chat only, no tool calls"
+                }
+              ]
+            },
+            {
+              "id": "model",
+              "name": "Model",
+              "category": "model",
+              "type": "select",
+              "currentValue": "auto",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto"
+                },
+                {
+                  "value": "agnes-3.0-flash",
+                  "name": "agnes-3.0-flash"
+                },
+                {
+                  "value": "agnes-2.5-flash",
+                  "name": "agnes-2.5-flash"
+                },
+                {
+                  "value": "agnes-2.5-pro",
+                  "name": "agnes-2.5-pro"
+                },
+                {
+                  "value": "deepseek-v4-flash",
+                  "name": "DeepSeek V4 Flash"
+                },
+                {
+                  "value": "deepseek-v4.1-flash",
+                  "name": "deepseek-v4.1-flash"
+                },
+                {
+                  "value": "glm-5.3",
+                  "name": "glm-5.3"
+                },
+                {
+                  "value": "glm-5.2",
+                  "name": "glm-5.2"
+                },
+                {
+                  "value": "kimi-k3",
+                  "name": "kimi-k3"
+                },
+                {
+                  "value": "deepseek-v4-pro",
+                  "name": "DeepSeek V4 Pro"
+                }
+              ]
+            }
+          ],
+          "_meta": {
+            "modelConfig": {
+              "model_name": "auto",
+              "context_limit": 512000,
+              "temperature": null,
+              "max_tokens": 65536,
+              "toolshim": false,
+              "toolshim_model": null,
+              "reasoning": false
+            },
+            "agnes": {
+              "readState": {
+                "activityVersion": 8,
+                "readVersion": 8,
+                "hasUnreadActivity": false
+              }
+            },
+            "extensionResults": [],
+            "backgroundExtensionRetryPending": true,
+            "workingDir": "/Users/tzz/Desktop/TestProject",
+            "readOnly": false,
+            "occupied": false,
+            "historyPage": {
+              "nextCursor": null,
+              "hasMore": false,
+              "returnedMessages": 43,
+              "totalVisibleMessages": 43
+            },
+            "remoteSessionView": {
+              "revision": 2,
+              "expiresAtMs": 0
+            }
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "保留说明来源；跳过 1 个非 JSON-RPC 元数据片段。"
+    ]
+  },
+  {
+    "source": "session:new.json",
+    "requests": [
+      {
+        "id": "38918379-2548-453A-808F-25C2030D7607",
+        "jsonrpc": "2.0",
+        "method": "session/new",
+        "params": {
+          "_meta": {
+            "isTemporary": true
+          },
+          "cwd": "/Users/tzz/.agnes/temporary",
+          "mcpServers": []
+        }
+      },
+      {
+        "id": "84C0CD28-89A5-4AEA-95D2-E897BF5A3313",
+        "jsonrpc": "2.0",
+        "method": "session/new",
+        "params": {
+          "_meta": {
+            "permissionMode": "smart_approve",
+            "projectId": "workspace:/Users/tzz/Desktop/TestProject"
+          },
+          "cwd": "/Users/tzz/Desktop/TestProject",
+          "mcpServers": []
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "38918379-2548-453A-808F-25C2030D7607",
+        "result": {
+          "sessionId": "20261028_3",
+          "modes": {
+            "currentModeId": "auto",
+            "availableModes": [
+              {
+                "id": "auto",
+                "name": "auto",
+                "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+              },
+              {
+                "id": "approve",
+                "name": "approve",
+                "description": "Ask before every tool call"
+              },
+              {
+                "id": "smart_approve",
+                "name": "smart_approve",
+                "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+              },
+              {
+                "id": "plan",
+                "name": "plan",
+                "description": "Explore with verified read-only tools; block all modifying calls"
+              },
+              {
+                "id": "chat",
+                "name": "chat",
+                "description": "Chat only, no tool calls"
+              }
+            ]
+          },
+          "configOptions": [
+            {
+              "id": "provider",
+              "name": "Provider",
+              "type": "select",
+              "currentValue": "agnes",
+              "options": [
+                {
+                  "value": "goose",
+                  "name": "Agnes (Default)"
+                },
+                {
+                  "value": "agnes",
+                  "name": "Agnes"
+                },
+                {
+                  "value": "alibaba",
+                  "name": "Alibaba (Qwen)"
+                },
+                {
+                  "value": "amp-acp",
+                  "name": "Amp"
+                },
+                {
+                  "value": "anthropic",
+                  "name": "Anthropic"
+                },
+                {
+                  "value": "atomic_chat",
+                  "name": "Atomic Chat"
+                },
+                {
+                  "value": "avian",
+                  "name": "Avian"
+                },
+                {
+                  "value": "aws_bedrock",
+                  "name": "Amazon Bedrock"
+                },
+                {
+                  "value": "azure_foundry",
+                  "name": "Azure AI Foundry"
+                },
+                {
+                  "value": "azure_openai",
+                  "name": "Azure OpenAI"
+                },
+                {
+                  "value": "celeris",
+                  "name": "Celeris"
+                },
+                {
+                  "value": "cerebras",
+                  "name": "Cerebras"
+                },
+                {
+                  "value": "chatgpt_codex",
+                  "name": "ChatGPT Codex"
+                },
+                {
+                  "value": "claude-acp",
+                  "name": "Claude Code"
+                },
+                {
+                  "value": "claude-code",
+                  "name": "Claude Code CLI"
+                },
+                {
+                  "value": "codex",
+                  "name": "OpenAI Codex CLI"
+                },
+                {
+                  "value": "codex-acp",
+                  "name": "Codex CLI"
+                },
+                {
+                  "value": "copilot-acp",
+                  "name": "GitHub Copilot CLI (ACP)"
+                },
+                {
+                  "value": "cursor-agent",
+                  "name": "Cursor Agent"
+                },
+                {
+                  "value": "custom_deepseek",
+                  "name": "DeepSeek"
+                },
+                {
+                  "value": "custom_tensorix",
+                  "name": "Tensorix"
+                },
+                {
+                  "value": "databricks",
+                  "name": "Databricks"
+                },
+                {
+                  "value": "databricks_v2",
+                  "name": "Databricks AI Gateway"
+                },
+                {
+                  "value": "empiriolabs",
+                  "name": "EmpirioLabs AI"
+                },
+                {
+                  "value": "fireworks-ai",
+                  "name": "Fireworks AI"
+                },
+                {
+                  "value": "friendli",
+                  "name": "Friendli AI"
+                },
+                {
+                  "value": "futurmix",
+                  "name": "FuturMix"
+                },
+                {
+                  "value": "gcp_vertex_ai",
+                  "name": "GCP Vertex AI"
+                },
+                {
+                  "value": "gemini-cli",
+                  "name": "Gemini CLI"
+                },
+                {
+                  "value": "gemini_oauth",
+                  "name": "Gemini"
+                },
+                {
+                  "value": "github_copilot",
+                  "name": "GitHub Copilot"
+                },
+                {
+                  "value": "google",
+                  "name": "Google Gemini (API Key)"
+                },
+                {
+                  "value": "groq",
+                  "name": "Groq"
+                },
+                {
+                  "value": "huggingface",
+                  "name": "Hugging Face"
+                },
+                {
+                  "value": "iflytek",
+                  "name": "iFlytek Spark"
+                },
+                {
+                  "value": "iflytek_astron",
+                  "name": "iFlytek Astron MaaS"
+                },
+                {
+                  "value": "inception",
+                  "name": "Inception"
+                },
+                {
+                  "value": "kimi_code",
+                  "name": "Kimi Code"
+                },
+                {
+                  "value": "litellm",
+                  "name": "LiteLLM"
+                },
+                {
+                  "value": "llama_swap",
+                  "name": "Llama Swap"
+                },
+                {
+                  "value": "lmstudio",
+                  "name": "LM Studio"
+                },
+                {
+                  "value": "local",
+                  "name": "Local Inference"
+                },
+                {
+                  "value": "meta",
+                  "name": "Meta"
+                },
+                {
+                  "value": "minimax",
+                  "name": "MiniMax"
+                },
+                {
+                  "value": "mistral",
+                  "name": "Mistral AI"
+                },
+                {
+                  "value": "moonshot",
+                  "name": "Moonshot"
+                },
+                {
+                  "value": "nano-gpt",
+                  "name": "NanoGPT"
+                },
+                {
+                  "value": "nearai",
+                  "name": "NEAR AI Cloud"
+                },
+                {
+                  "value": "novita",
+                  "name": "Novita AI"
+                },
+                {
+                  "value": "nvidia",
+                  "name": "NVIDIA"
+                },
+                {
+                  "value": "ollama",
+                  "name": "Ollama"
+                },
+                {
+                  "value": "ollama_cloud",
+                  "name": "Ollama Cloud"
+                },
+                {
+                  "value": "omlx",
+                  "name": "oMLX"
+                },
+                {
+                  "value": "openai",
+                  "name": "OpenAI"
+                },
+                {
+                  "value": "opencode_go",
+                  "name": "OpenCode Go"
+                },
+                {
+                  "value": "openrouter",
+                  "name": "OpenRouter"
+                },
+                {
+                  "value": "orcarouter",
+                  "name": "OrcaRouter"
+                },
+                {
+                  "value": "ovhcloud",
+                  "name": "OVHcloud"
+                },
+                {
+                  "value": "perplexity",
+                  "name": "Perplexity"
+                },
+                {
+                  "value": "pi-acp",
+                  "name": "Pi"
+                },
+                {
+                  "value": "routstr",
+                  "name": "Routstr"
+                },
+                {
+                  "value": "sagemaker_tgi",
+                  "name": "Amazon SageMaker TGI"
+                },
+                {
+                  "value": "sakana",
+                  "name": "Sakana AI"
+                },
+                {
+                  "value": "saladcloud",
+                  "name": "SaladCloud AI Gateway"
+                },
+                {
+                  "value": "scaleway",
+                  "name": "Scaleway"
+                },
+                {
+                  "value": "snowflake",
+                  "name": "Snowflake"
+                },
+                {
+                  "value": "tanzu_ai",
+                  "name": "VMware Tanzu Platform"
+                },
+                {
+                  "value": "tetrate",
+                  "name": "Tetrate Agent Router Service"
+                },
+                {
+                  "value": "together",
+                  "name": "Together AI"
+                },
+                {
+                  "value": "venice",
+                  "name": "Venice.ai"
+                },
+                {
+                  "value": "vercel_ai_gateway",
+                  "name": "Vercel AI Gateway"
+                },
+                {
+                  "value": "xai",
+                  "name": "xAI"
+                },
+                {
+                  "value": "xai_oauth",
+                  "name": "xAI (SuperGrok Subscription)"
+                },
+                {
+                  "value": "zai",
+                  "name": "Z.AI"
+                },
+                {
+                  "value": "zhipu",
+                  "name": "Zhipu AI"
+                }
+              ]
+            },
+            {
+              "id": "mode",
+              "name": "Mode",
+              "category": "mode",
+              "type": "select",
+              "currentValue": "auto",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto",
+                  "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+                },
+                {
+                  "value": "approve",
+                  "name": "approve",
+                  "description": "Ask before every tool call"
+                },
+                {
+                  "value": "smart_approve",
+                  "name": "smart_approve",
+                  "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+                },
+                {
+                  "value": "plan",
+                  "name": "plan",
+                  "description": "Explore with verified read-only tools; block all modifying calls"
+                },
+                {
+                  "value": "chat",
+                  "name": "chat",
+                  "description": "Chat only, no tool calls"
+                }
+              ]
+            },
+            {
+              "id": "model",
+              "name": "Model",
+              "category": "model",
+              "type": "select",
+              "currentValue": "auto",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto"
+                },
+                {
+                  "value": "agnes-3.0-flash",
+                  "name": "agnes-3.0-flash"
+                },
+                {
+                  "value": "agnes-2.5-flash",
+                  "name": "agnes-2.5-flash"
+                },
+                {
+                  "value": "agnes-2.5-pro",
+                  "name": "agnes-2.5-pro"
+                },
+                {
+                  "value": "deepseek-v4-flash",
+                  "name": "DeepSeek V4 Flash"
+                },
+                {
+                  "value": "deepseek-v4.1-flash",
+                  "name": "deepseek-v4.1-flash"
+                },
+                {
+                  "value": "glm-5.3",
+                  "name": "glm-5.3"
+                },
+                {
+                  "value": "glm-5.2",
+                  "name": "glm-5.2"
+                },
+                {
+                  "value": "kimi-k3",
+                  "name": "kimi-k3"
+                },
+                {
+                  "value": "deepseek-v4-pro",
+                  "name": "DeepSeek V4 Pro"
+                }
+              ]
+            }
+          ],
+          "_meta": {
+            "modelConfig": {
+              "model_name": "auto",
+              "context_limit": 512000,
+              "temperature": null,
+              "max_tokens": 65536,
+              "toolshim": false,
+              "toolshim_model": null,
+              "reasoning": false
+            },
+            "agnes": {
+              "readState": {
+                "activityVersion": 0,
+                "readVersion": 0,
+                "hasUnreadActivity": false
+              }
+            },
+            "extensionResults": [
+              {
+                "name": "agnes_aigc",
+                "success": true
+              },
+              {
+                "name": "analyze",
+                "success": true
+              },
+              {
+                "name": "summon",
+                "success": true
+              },
+              {
+                "name": "todo",
+                "success": true
+              },
+              {
+                "name": "agnes_artifacts",
+                "success": true
+              },
+              {
+                "name": "Extension Manager",
+                "success": true
+              },
+              {
+                "name": "skills",
+                "success": true
+              },
+              {
+                "name": "developer",
+                "success": true
+              },
+              {
+                "name": "agnes_slide",
+                "success": true
+              },
+              {
+                "name": "agnes_research",
+                "success": true
+              },
+              {
+                "name": "agnes_web_search",
+                "success": true
+              },
+              {
+                "name": "tom",
+                "success": true
+              },
+              {
+                "name": "scheduler",
+                "success": true
+              },
+              {
+                "name": "Agnes Code Docs",
+                "success": false,
+                "error": "Extension loading exceeded the 3000 ms session startup limit"
+              },
+              {
+                "name": "PDF Reader",
+                "success": false,
+                "error": "Extension loading exceeded the 3000 ms session startup limit"
+              },
+              {
+                "name": "Playwright",
+                "success": true
+              },
+              {
+                "name": "agnes_xmind",
+                "success": true
+              },
+              {
+                "name": "GitHub",
+                "success": false,
+                "error": "error during extension setup: GitHub is not authorized. Connect GitHub from App Connect before using this extension."
+              },
+              {
+                "name": "Feishu",
+                "success": true
+              }
+            ],
+            "backgroundExtensionRetryPending": true,
+            "workingDir": "/Users/tzz/.agnes/temporary/2026-10-28/20261028_3/work"
+          }
+        }
+      }
+    ],
+    "notifications": [],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "请求与响应 ID 不完全配对；按方法制作样例，不当成原始完整事务。"
+    ]
+  },
+  {
+    "source": "session:prompt.json",
+    "requests": [
+      {
+        "id": "0E5E92A6-9B27-46EA-8E6C-4B45867E42C2",
+        "jsonrpc": "2.0",
+        "method": "session/prompt",
+        "params": {
+          "prompt": [
+            {
+              "_meta": {
+                "agnes": {
+                  "created": 1793152074,
+                  "messageId": "D1992772-109D-471A-B23C-25F209ADB2F7",
+                  "requestId": "94C45443-1E2B-4228-B7EE-B83A7E620D92"
+                }
+              },
+              "text": "继续处理我的日常项目开发任务",
+              "type": "text"
+            }
+          ],
+          "sessionId": "20261028_3"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "0E5E92A6-9B27-46EA-8E6C-4B45867E42C2",
+        "result": {
+          "stopReason": "end_turn",
+          "usage": {
+            "totalTokens": 34730,
+            "inputTokens": 34602,
+            "outputTokens": 128
+          }
+        }
+      }
+    ],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261028_6",
+          "update": {
+            "sessionUpdate": "prompt_queue_update",
+            "entry": {
+              "requestId": "E3B4FF6E-7D27-434C-A2E2-6AB0508FFDF1",
+              "sessionId": "20261028_6",
+              "messageId": "BD0C27D5-D64C-4E9B-9351-316DC1EAAADF",
+              "status": "running",
+              "runId": "run_997bde59-d85c-4827-838b-123dcebebcf1",
+              "createdAt": 1793174414,
+              "updatedAt": 1793174414,
+              "submittedAtMs": 1793174414000,
+              "startedAtMs": 1793174414664
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_6",
+          "update": {
+            "sessionUpdate": "session_info_update",
+            "_meta": {
+              "agnes": {
+                "activeRunId": "run_997bde59-d85c-4827-838b-123dcebebcf1"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_6",
+          "update": {
+            "sessionUpdate": "session_info_update",
+            "_meta": {
+              "agnes": {
+                "requiredExtensionWait": {
+                  "messageId": "BD0C27D5-D64C-4E9B-9351-316DC1EAAADF",
+                  "waitId": "01a18186-254b-7640-bd3b-9c7529e45534",
+                  "startedAtMs": null,
+                  "extensions": []
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "混有多个会话；通知须按场景选择，不能推断为同一次调用。"
+    ]
+  },
+  {
+    "source": "session:set_config_option.json",
+    "requests": [
+      {
+        "id": "3DE4A59E-F3A7-42ED-B4EF-A27BD4B1D223",
+        "jsonrpc": "2.0",
+        "method": "session/set_config_option",
+        "params": {
+          "configId": "provider",
+          "sessionId": "20261028_4",
+          "value": "agnes"
+        }
+      }
+    ],
+    "responses": [
+      {
+        "jsonrpc": "2.0",
+        "id": "3DE4A59E-F3A7-42ED-B4EF-A27BD4B1D223",
+        "result": {
+          "configOptions": [
+            {
+              "id": "provider",
+              "name": "Provider",
+              "type": "select",
+              "currentValue": "agnes",
+              "options": [
+                {
+                  "value": "goose",
+                  "name": "Agnes (Default)"
+                },
+                {
+                  "value": "agnes",
+                  "name": "Agnes"
+                },
+                {
+                  "value": "alibaba",
+                  "name": "Alibaba (Qwen)"
+                },
+                {
+                  "value": "amp-acp",
+                  "name": "Amp"
+                },
+                {
+                  "value": "anthropic",
+                  "name": "Anthropic"
+                },
+                {
+                  "value": "atomic_chat",
+                  "name": "Atomic Chat"
+                },
+                {
+                  "value": "avian",
+                  "name": "Avian"
+                },
+                {
+                  "value": "aws_bedrock",
+                  "name": "Amazon Bedrock"
+                },
+                {
+                  "value": "azure_foundry",
+                  "name": "Azure AI Foundry"
+                },
+                {
+                  "value": "azure_openai",
+                  "name": "Azure OpenAI"
+                },
+                {
+                  "value": "celeris",
+                  "name": "Celeris"
+                },
+                {
+                  "value": "cerebras",
+                  "name": "Cerebras"
+                },
+                {
+                  "value": "chatgpt_codex",
+                  "name": "ChatGPT Codex"
+                },
+                {
+                  "value": "claude-acp",
+                  "name": "Claude Code"
+                },
+                {
+                  "value": "claude-code",
+                  "name": "Claude Code CLI"
+                },
+                {
+                  "value": "codex",
+                  "name": "OpenAI Codex CLI"
+                },
+                {
+                  "value": "codex-acp",
+                  "name": "Codex CLI"
+                },
+                {
+                  "value": "copilot-acp",
+                  "name": "GitHub Copilot CLI (ACP)"
+                },
+                {
+                  "value": "cursor-agent",
+                  "name": "Cursor Agent"
+                },
+                {
+                  "value": "custom_deepseek",
+                  "name": "DeepSeek"
+                },
+                {
+                  "value": "custom_tensorix",
+                  "name": "Tensorix"
+                },
+                {
+                  "value": "databricks",
+                  "name": "Databricks"
+                },
+                {
+                  "value": "databricks_v2",
+                  "name": "Databricks AI Gateway"
+                },
+                {
+                  "value": "empiriolabs",
+                  "name": "EmpirioLabs AI"
+                },
+                {
+                  "value": "fireworks-ai",
+                  "name": "Fireworks AI"
+                },
+                {
+                  "value": "friendli",
+                  "name": "Friendli AI"
+                },
+                {
+                  "value": "futurmix",
+                  "name": "FuturMix"
+                },
+                {
+                  "value": "gcp_vertex_ai",
+                  "name": "GCP Vertex AI"
+                },
+                {
+                  "value": "gemini-cli",
+                  "name": "Gemini CLI"
+                },
+                {
+                  "value": "gemini_oauth",
+                  "name": "Gemini"
+                },
+                {
+                  "value": "github_copilot",
+                  "name": "GitHub Copilot"
+                },
+                {
+                  "value": "google",
+                  "name": "Google Gemini (API Key)"
+                },
+                {
+                  "value": "groq",
+                  "name": "Groq"
+                },
+                {
+                  "value": "huggingface",
+                  "name": "Hugging Face"
+                },
+                {
+                  "value": "iflytek",
+                  "name": "iFlytek Spark"
+                },
+                {
+                  "value": "iflytek_astron",
+                  "name": "iFlytek Astron MaaS"
+                },
+                {
+                  "value": "inception",
+                  "name": "Inception"
+                },
+                {
+                  "value": "kimi_code",
+                  "name": "Kimi Code"
+                },
+                {
+                  "value": "litellm",
+                  "name": "LiteLLM"
+                },
+                {
+                  "value": "llama_swap",
+                  "name": "Llama Swap"
+                },
+                {
+                  "value": "lmstudio",
+                  "name": "LM Studio"
+                },
+                {
+                  "value": "local",
+                  "name": "Local Inference"
+                },
+                {
+                  "value": "meta",
+                  "name": "Meta"
+                },
+                {
+                  "value": "minimax",
+                  "name": "MiniMax"
+                },
+                {
+                  "value": "mistral",
+                  "name": "Mistral AI"
+                },
+                {
+                  "value": "moonshot",
+                  "name": "Moonshot"
+                },
+                {
+                  "value": "nano-gpt",
+                  "name": "NanoGPT"
+                },
+                {
+                  "value": "nearai",
+                  "name": "NEAR AI Cloud"
+                },
+                {
+                  "value": "novita",
+                  "name": "Novita AI"
+                },
+                {
+                  "value": "nvidia",
+                  "name": "NVIDIA"
+                },
+                {
+                  "value": "ollama",
+                  "name": "Ollama"
+                },
+                {
+                  "value": "ollama_cloud",
+                  "name": "Ollama Cloud"
+                },
+                {
+                  "value": "omlx",
+                  "name": "oMLX"
+                },
+                {
+                  "value": "openai",
+                  "name": "OpenAI"
+                },
+                {
+                  "value": "opencode_go",
+                  "name": "OpenCode Go"
+                },
+                {
+                  "value": "openrouter",
+                  "name": "OpenRouter"
+                },
+                {
+                  "value": "orcarouter",
+                  "name": "OrcaRouter"
+                },
+                {
+                  "value": "ovhcloud",
+                  "name": "OVHcloud"
+                },
+                {
+                  "value": "perplexity",
+                  "name": "Perplexity"
+                },
+                {
+                  "value": "pi-acp",
+                  "name": "Pi"
+                },
+                {
+                  "value": "routstr",
+                  "name": "Routstr"
+                },
+                {
+                  "value": "sagemaker_tgi",
+                  "name": "Amazon SageMaker TGI"
+                },
+                {
+                  "value": "sakana",
+                  "name": "Sakana AI"
+                },
+                {
+                  "value": "saladcloud",
+                  "name": "SaladCloud AI Gateway"
+                },
+                {
+                  "value": "scaleway",
+                  "name": "Scaleway"
+                },
+                {
+                  "value": "snowflake",
+                  "name": "Snowflake"
+                },
+                {
+                  "value": "tanzu_ai",
+                  "name": "VMware Tanzu Platform"
+                },
+                {
+                  "value": "tetrate",
+                  "name": "Tetrate Agent Router Service"
+                },
+                {
+                  "value": "together",
+                  "name": "Together AI"
+                },
+                {
+                  "value": "venice",
+                  "name": "Venice.ai"
+                },
+                {
+                  "value": "vercel_ai_gateway",
+                  "name": "Vercel AI Gateway"
+                },
+                {
+                  "value": "xai",
+                  "name": "xAI"
+                },
+                {
+                  "value": "xai_oauth",
+                  "name": "xAI (SuperGrok Subscription)"
+                },
+                {
+                  "value": "zai",
+                  "name": "Z.AI"
+                },
+                {
+                  "value": "zhipu",
+                  "name": "Zhipu AI"
+                }
+              ]
+            },
+            {
+              "id": "mode",
+              "name": "Mode",
+              "category": "mode",
+              "type": "select",
+              "currentValue": "approve",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto",
+                  "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+                },
+                {
+                  "value": "approve",
+                  "name": "approve",
+                  "description": "Ask before every tool call"
+                },
+                {
+                  "value": "smart_approve",
+                  "name": "smart_approve",
+                  "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+                },
+                {
+                  "value": "plan",
+                  "name": "plan",
+                  "description": "Explore with verified read-only tools; block all modifying calls"
+                },
+                {
+                  "value": "chat",
+                  "name": "chat",
+                  "description": "Chat only, no tool calls"
+                }
+              ]
+            },
+            {
+              "id": "model",
+              "name": "Model",
+              "category": "model",
+              "type": "select",
+              "currentValue": "auto",
+              "options": [
+                {
+                  "value": "auto",
+                  "name": "auto"
+                },
+                {
+                  "value": "agnes-3.0-flash",
+                  "name": "agnes-3.0-flash"
+                },
+                {
+                  "value": "agnes-2.5-flash",
+                  "name": "agnes-2.5-flash"
+                },
+                {
+                  "value": "agnes-2.5-pro",
+                  "name": "agnes-2.5-pro"
+                },
+                {
+                  "value": "deepseek-v4-flash",
+                  "name": "DeepSeek V4 Flash"
+                },
+                {
+                  "value": "deepseek-v4.1-flash",
+                  "name": "deepseek-v4.1-flash"
+                },
+                {
+                  "value": "glm-5.3",
+                  "name": "glm-5.3"
+                },
+                {
+                  "value": "glm-5.2",
+                  "name": "glm-5.2"
+                },
+                {
+                  "value": "kimi-k3",
+                  "name": "kimi-k3"
+                },
+                {
+                  "value": "deepseek-v4-pro",
+                  "name": "DeepSeek V4 Pro"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_6",
+          "update": {
+            "sessionUpdate": "config_option_update",
+            "configOptions": [
+              {
+                "id": "provider",
+                "name": "Provider",
+                "type": "select",
+                "currentValue": "agnes",
+                "options": [
+                  {
+                    "value": "goose",
+                    "name": "Agnes (Default)"
+                  },
+                  {
+                    "value": "agnes",
+                    "name": "Agnes"
+                  },
+                  {
+                    "value": "alibaba",
+                    "name": "Alibaba (Qwen)"
+                  },
+                  {
+                    "value": "amp-acp",
+                    "name": "Amp"
+                  },
+                  {
+                    "value": "anthropic",
+                    "name": "Anthropic"
+                  },
+                  {
+                    "value": "atomic_chat",
+                    "name": "Atomic Chat"
+                  },
+                  {
+                    "value": "avian",
+                    "name": "Avian"
+                  },
+                  {
+                    "value": "aws_bedrock",
+                    "name": "Amazon Bedrock"
+                  },
+                  {
+                    "value": "azure_foundry",
+                    "name": "Azure AI Foundry"
+                  },
+                  {
+                    "value": "azure_openai",
+                    "name": "Azure OpenAI"
+                  },
+                  {
+                    "value": "celeris",
+                    "name": "Celeris"
+                  },
+                  {
+                    "value": "cerebras",
+                    "name": "Cerebras"
+                  },
+                  {
+                    "value": "chatgpt_codex",
+                    "name": "ChatGPT Codex"
+                  },
+                  {
+                    "value": "claude-acp",
+                    "name": "Claude Code"
+                  },
+                  {
+                    "value": "claude-code",
+                    "name": "Claude Code CLI"
+                  },
+                  {
+                    "value": "codex",
+                    "name": "OpenAI Codex CLI"
+                  },
+                  {
+                    "value": "codex-acp",
+                    "name": "Codex CLI"
+                  },
+                  {
+                    "value": "copilot-acp",
+                    "name": "GitHub Copilot CLI (ACP)"
+                  },
+                  {
+                    "value": "cursor-agent",
+                    "name": "Cursor Agent"
+                  },
+                  {
+                    "value": "custom_deepseek",
+                    "name": "DeepSeek"
+                  },
+                  {
+                    "value": "custom_tensorix",
+                    "name": "Tensorix"
+                  },
+                  {
+                    "value": "databricks",
+                    "name": "Databricks"
+                  },
+                  {
+                    "value": "databricks_v2",
+                    "name": "Databricks AI Gateway"
+                  },
+                  {
+                    "value": "empiriolabs",
+                    "name": "EmpirioLabs AI"
+                  },
+                  {
+                    "value": "fireworks-ai",
+                    "name": "Fireworks AI"
+                  },
+                  {
+                    "value": "friendli",
+                    "name": "Friendli AI"
+                  },
+                  {
+                    "value": "futurmix",
+                    "name": "FuturMix"
+                  },
+                  {
+                    "value": "gcp_vertex_ai",
+                    "name": "GCP Vertex AI"
+                  },
+                  {
+                    "value": "gemini-cli",
+                    "name": "Gemini CLI"
+                  },
+                  {
+                    "value": "gemini_oauth",
+                    "name": "Gemini"
+                  },
+                  {
+                    "value": "github_copilot",
+                    "name": "GitHub Copilot"
+                  },
+                  {
+                    "value": "google",
+                    "name": "Google Gemini (API Key)"
+                  },
+                  {
+                    "value": "groq",
+                    "name": "Groq"
+                  },
+                  {
+                    "value": "huggingface",
+                    "name": "Hugging Face"
+                  },
+                  {
+                    "value": "iflytek",
+                    "name": "iFlytek Spark"
+                  },
+                  {
+                    "value": "iflytek_astron",
+                    "name": "iFlytek Astron MaaS"
+                  },
+                  {
+                    "value": "inception",
+                    "name": "Inception"
+                  },
+                  {
+                    "value": "kimi_code",
+                    "name": "Kimi Code"
+                  },
+                  {
+                    "value": "litellm",
+                    "name": "LiteLLM"
+                  },
+                  {
+                    "value": "llama_swap",
+                    "name": "Llama Swap"
+                  },
+                  {
+                    "value": "lmstudio",
+                    "name": "LM Studio"
+                  },
+                  {
+                    "value": "local",
+                    "name": "Local Inference"
+                  },
+                  {
+                    "value": "meta",
+                    "name": "Meta"
+                  },
+                  {
+                    "value": "minimax",
+                    "name": "MiniMax"
+                  },
+                  {
+                    "value": "mistral",
+                    "name": "Mistral AI"
+                  },
+                  {
+                    "value": "moonshot",
+                    "name": "Moonshot"
+                  },
+                  {
+                    "value": "nano-gpt",
+                    "name": "NanoGPT"
+                  },
+                  {
+                    "value": "nearai",
+                    "name": "NEAR AI Cloud"
+                  },
+                  {
+                    "value": "novita",
+                    "name": "Novita AI"
+                  },
+                  {
+                    "value": "nvidia",
+                    "name": "NVIDIA"
+                  },
+                  {
+                    "value": "ollama",
+                    "name": "Ollama"
+                  },
+                  {
+                    "value": "ollama_cloud",
+                    "name": "Ollama Cloud"
+                  },
+                  {
+                    "value": "omlx",
+                    "name": "oMLX"
+                  },
+                  {
+                    "value": "openai",
+                    "name": "OpenAI"
+                  },
+                  {
+                    "value": "opencode_go",
+                    "name": "OpenCode Go"
+                  },
+                  {
+                    "value": "openrouter",
+                    "name": "OpenRouter"
+                  },
+                  {
+                    "value": "orcarouter",
+                    "name": "OrcaRouter"
+                  },
+                  {
+                    "value": "ovhcloud",
+                    "name": "OVHcloud"
+                  },
+                  {
+                    "value": "perplexity",
+                    "name": "Perplexity"
+                  },
+                  {
+                    "value": "pi-acp",
+                    "name": "Pi"
+                  },
+                  {
+                    "value": "routstr",
+                    "name": "Routstr"
+                  },
+                  {
+                    "value": "sagemaker_tgi",
+                    "name": "Amazon SageMaker TGI"
+                  },
+                  {
+                    "value": "sakana",
+                    "name": "Sakana AI"
+                  },
+                  {
+                    "value": "saladcloud",
+                    "name": "SaladCloud AI Gateway"
+                  },
+                  {
+                    "value": "scaleway",
+                    "name": "Scaleway"
+                  },
+                  {
+                    "value": "snowflake",
+                    "name": "Snowflake"
+                  },
+                  {
+                    "value": "tanzu_ai",
+                    "name": "VMware Tanzu Platform"
+                  },
+                  {
+                    "value": "tetrate",
+                    "name": "Tetrate Agent Router Service"
+                  },
+                  {
+                    "value": "together",
+                    "name": "Together AI"
+                  },
+                  {
+                    "value": "venice",
+                    "name": "Venice.ai"
+                  },
+                  {
+                    "value": "vercel_ai_gateway",
+                    "name": "Vercel AI Gateway"
+                  },
+                  {
+                    "value": "xai",
+                    "name": "xAI"
+                  },
+                  {
+                    "value": "xai_oauth",
+                    "name": "xAI (SuperGrok Subscription)"
+                  },
+                  {
+                    "value": "zai",
+                    "name": "Z.AI"
+                  },
+                  {
+                    "value": "zhipu",
+                    "name": "Zhipu AI"
+                  }
+                ]
+              },
+              {
+                "id": "mode",
+                "name": "Mode",
+                "category": "mode",
+                "type": "select",
+                "currentValue": "approve",
+                "options": [
+                  {
+                    "value": "approve",
+                    "name": "approve",
+                    "description": "Ask before every tool call"
+                  },
+                  {
+                    "value": "smart_approve",
+                    "name": "smart_approve",
+                    "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+                  },
+                  {
+                    "value": "auto",
+                    "name": "auto",
+                    "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+                  }
+                ]
+              },
+              {
+                "id": "model",
+                "name": "Model",
+                "category": "model",
+                "type": "select",
+                "currentValue": "agnes-3.0-flash",
+                "options": [
+                  {
+                    "value": "auto",
+                    "name": "auto"
+                  },
+                  {
+                    "value": "agnes-3.0-flash",
+                    "name": "agnes-3.0-flash"
+                  },
+                  {
+                    "value": "agnes-2.5-flash",
+                    "name": "agnes-2.5-flash"
+                  },
+                  {
+                    "value": "agnes-2.5-pro",
+                    "name": "agnes-2.5-pro"
+                  },
+                  {
+                    "value": "deepseek-v4-flash",
+                    "name": "DeepSeek V4 Flash"
+                  },
+                  {
+                    "value": "deepseek-v4.1-flash",
+                    "name": "deepseek-v4.1-flash"
+                  },
+                  {
+                    "value": "glm-5.3",
+                    "name": "glm-5.3"
+                  },
+                  {
+                    "value": "glm-5.2",
+                    "name": "glm-5.2"
+                  },
+                  {
+                    "value": "kimi-k3",
+                    "name": "kimi-k3"
+                  },
+                  {
+                    "value": "deepseek-v4-pro",
+                    "name": "DeepSeek V4 Pro"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "混有多个会话；通知须按场景选择，不能推断为同一次调用。"
+    ]
+  },
+  {
+    "source": "session:update.json",
+    "requests": [],
+    "responses": [],
+    "notifications": [
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "session_info_update",
+            "title": "继续处理我的日常项目开发任务",
+            "updatedAt": "2026-10-28T01:47:50+00:00",
+            "_meta": {
+              "messageCount": 0,
+              "userSetName": false,
+              "workingDir": "/Users/tzz/.agnes/temporary/2026-10-28/20261028_3/work"
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_3",
+          "update": {
+            "sessionUpdate": "session_info_update",
+            "_meta": {
+              "agnes": {
+                "requiredExtensionWait": {
+                  "messageId": "D1992772-109D-471A-B23C-25F209ADB2F7",
+                  "waitId": "01a18031-431b-74c2-b568-424de8c69cc6",
+                  "startedAtMs": null,
+                  "extensions": []
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "usage_update",
+            "used": 0,
+            "size": 512000
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_5",
+          "update": {
+            "sessionUpdate": "available_commands_update",
+            "availableCommands": [
+              {
+                "name": "prompts",
+                "description": "List available prompts, optionally filtered by extension",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "prompt",
+                "description": "Execute a prompt or show its info with --info",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "compact",
+                "description": "Compact the conversation history",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "clear",
+                "description": "Clear the conversation history",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "skills",
+                "description": "List installed skills and other available sources",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "doctor",
+                "description": "Check that your Agnes setup is working",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "goal",
+                "description": "Set a goal the agent must satisfy before finishing, or clear with /goal off",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "grind",
+                "description": "Set a goal the agent pursues relentlessly until max_turns, or clear with /grind off",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              },
+              {
+                "name": "status",
+                "description": "Show session status: model, provider, mode, and token usage",
+                "_meta": {
+                  "commandType": "Builtin"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "user_message_chunk",
+            "content": {
+              "type": "text",
+              "text": "帮我生成一个排序算法的swift文件",
+              "_meta": {
+                "agnes": {
+                  "requestId": "01a17af2-a70a-7163-89e8-56f39a517f19",
+                  "messageId": "msg_01a17af2-a5bc-771a-8656-4c15c1d3071d",
+                  "created": 1793064071
+                }
+              }
+            },
+            "messageId": "msg_01a17af2-a5bc-771a-8656-4c15c1d3071d",
+            "_meta": {
+              "agnes": {
+                "created": 1793064071,
+                "messageId": "msg_01a17af2-a5bc-771a-8656-4c15c1d3071d"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "tool_call",
+            "toolCallId": "call_0f51945b69394217815ac996",
+            "title": "todo: todo write",
+            "rawInput": {
+              "content": "- [x] 需求：生成排序算法 Swift 文件\n- [ ] 检查目标目录及同名文件\n- [ ] 编写 Swift 排序算法文件\n- [ ] 做语法/本地编译校验\n- [ ] 登记并交付用户文件"
+            },
+            "_meta": {
+              "goose": {
+                "toolCall": {
+                  "toolName": "todo__todo_write",
+                  "extensionName": "todo"
+                }
+              },
+              "agnes": {
+                "created": 1793064109,
+                "messageId": "5bc11ba96681401c88a5619c1bd61fa8"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "tool_call",
+            "toolCallId": "call_56dd15876f3a4a398c9ae0aa",
+            "title": "shell · cd /Users/tzz/Desktop/TestProject && ls -la && (comman...…",
+            "rawInput": {
+              "command": "cd /Users/tzz/Desktop/TestProject && ls -la && (command -v swift || command -v swiftc || echo \"swift not found\")"
+            },
+            "_meta": {
+              "goose": {
+                "toolCall": {
+                  "toolName": "shell"
+                }
+              },
+              "agnes": {
+                "created": 1793064111,
+                "messageId": "8aa6229f1a334a81b0b602fb2a8193be"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "tool_call",
+            "toolCallId": "call_60ee9324fae2491ab9172fef",
+            "title": "write · /Users/tzz/Desktop/TestProject/SortingAlgorithms.swift",
+            "rawInput": {
+              "path": "/Users/tzz/Desktop/TestProject/SortingAlgorithms.swift",
+              "content": "//\n//  SortingAlgorithms.swift\n//  常见排序算法实现：冒泡、插入、选择、希尔、归并、快排、堆排\n//\n\nimport Foundation\n\n// MARK: - 排序算法协议\nprotocol Sortable {\n    func bubbleSort(_ arr: inout [Int])\n    func insertionSort(_ arr: inout [Int])\n    func selectionSort(_ arr: inout [Int])\n    func shellSort(_ arr: inout [Int])\n    func mergeSort(_ arr: inout [Int])\n    func quickSort(_ arr: inout [Int])\n    func heapSort(_ arr: inout [Int])\n}\n\n// MARK: - 排序算法实现\nstruct SortingAlgorithms: Sortable {\n\n    /// 冒泡排序（O(n²)，稳定）\n    func bubbleSort(_ arr: inout [Int]) {\n        let n = arr.count\n        for i in 0..<max(n - 1, 0) {\n            var swapped = false\n            for j in 0..<(n - i - 1) {\n                if arr[j] > arr[j + 1] {\n                    arr.swapAt(j, j + 1)\n                    swapped = true\n                }\n            }\n            if !swapped { break } // 提前结束\n        }\n    }\n\n    /// 插入排序（O(n²)，稳定，适合近乎有序数组）\n    func insertionSort(_ arr: inout [Int]) {\n        for i in 1..<arr.count {\n            let key = arr[i]\n            var j = i - 1\n            while j >= 0 && arr[j] > key {\n                arr[j + 1] = arr[j]\n                j -= 1\n            }\n            arr[j + 1] = key\n        }\n    }\n\n    /// 选择排序（O(n²)，不稳定）\n    func selectionSort(_ arr: inout [Int]) {\n        let n = arr.count\n        for i in 0..<max(n - 1, 0) {\n            var minIdx = i\n            for j in (i + 1)..<n where arr[j] < arr[minIdx] {\n                minIdx = j\n            }\n            if minIdx != i {\n                arr.swapAt(i, minIdx)\n            }\n        }\n    }\n\n    /// 希尔排序（O(n log n) ~ O(n^1.5)，不稳定）\n    func shellSort(_ arr: inout [Int]) {\n        let n = arr.count\n        var gap = n / 2\n        while gap > 0 {\n            for i in gap..<n {\n                let temp = arr[i]\n                var j = i\n                while j >= gap && arr[j - gap] > temp {\n                    arr[j] = arr[j - gap]\n                    j -= gap\n                }\n                arr[j] = temp\n            }\n            gap /= 2\n        }\n    }\n\n    /// 归并排序（O(n log n)，稳定）\n    func mergeSort(_ arr: inout [Int]) {\n        guard arr.count > 1 else { return }\n        mergeSortRecursive(&arr, 0, arr.count - 1, buffer: &buffer)\n    }\n\n    private var buffer: [Int] = []\n\n    private func mergeSortRecursive(_ arr: inout [Int], _ l: Int, _ r: Int, buffer: inout [Int]) {\n        guard l < r else { return }\n        let mid = l + (r - l) / 2\n        mergeSortRecursive(&arr, l, mid, buffer: &buffer)\n        mergeSortRecursive(&arr, mid + 1, r, buffer: &buffer)\n        merge(&arr, l, mid, r, buffer: &buffer)\n    }\n\n    private func merge(_ arr: inout [Int], _ l: Int, _ mid: Int, _ r: Int, buffer: inout [Int]) {\n        let leftSlice = arr[l...mid]\n        let rightSlice = arr[mid + 1...r]\n        var i = 0\n        var j = 0\n        var k = l\n\n        while i < leftSlice.count && j < rightSlice.count {\n            if leftSlice[i] <= rightSlice[j] {\n                buffer[k] = leftSlice[i]\n                i += 1\n            } else {\n                buffer[k] = rightSlice[j]\n                j += 1\n            }\n            k += 1\n        }\n\n        while i < leftSlice.count {\n            buffer[k] = leftSlice[i]\n            i += 1\n            k += 1\n        }\n        while j < rightSlice.count {\n            buffer[k] = rightSlice[j]\n            j += 1\n            k += 1\n        }\n\n        arr[l...r] = buffer[l...r]\n    }\n\n    /// 快速排序（平均 O(n log n)，不稳定）\n    func quickSort(_ arr: inout [Int]) {\n        quickSort(&arr, 0, arr.count - 1)\n    }\n\n    private func quickSort(_ arr: inout [Int], _ low: Int, _ high: Int) {\n        guard low < high else { return }\n        let pivotIdx = partition(&arr, low, high)\n        quickSort(&arr, low, pivotIdx - 1)\n        quickSort(&arr, pivotIdx + 1, high)\n    }\n\n    private func partition(_ arr: inout [Int], _ low: Int, _ high: Int) -> Int {\n        let pivot = arr[high]\n        var i = low - 1\n        for j in low..<high {\n            if arr[j] <= pivot {\n                i += 1\n                arr.swapAt(i, j)\n            }\n        }\n        arr.swapAt(i + 1, high)\n        return i + 1\n    }\n\n    /// 堆排序（O(n log n)，不稳定）\n    func heapSort(_ arr: inout [Int]) {\n        let n = arr.count\n        // 建最大堆\n        for i in (n / 2 - 1)..<0 {\n            heapify(&arr, i, heapSize: n)\n        }\n        // 逐步提取堆顶\n        for end in stride(from: n - 1, to: 0, by: -1) {\n            arr.swapAt(0, end)\n            heapify(&arr, 0, heapSize: end)\n        }\n    }\n\n    private func heapify(_ arr: inout [Int], _ i: Int, heapSize: Int) {\n        var largest = i\n        let left = 2 * i + 1\n        let right = 2 * i + 2\n\n        if left < heapSize && arr[left] > arr[largest] {\n            largest = left\n        }\n        if right < heapSize && arr[right] > arr[largest] {\n            largest = right\n        }\n        if largest != i {\n            arr.swapAt(i, largest)\n            heapify(&arr, largest, heapSize: heapSize)\n        }\n    }\n}\n\n// MARK: - 演示\nextension SortingAlgorithms {\n    /// 对同一组数据跑全部算法并打印结果\n    static func runDemo() {\n        let data = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]\n        print(\"原始数据:\", data)\n\n        var s = SortingAlgorithms()\n\n        var arr1 = data; s.bubbleSort(&arr1);    print(\"冒泡排序:\", arr1)\n        var arr2 = data; s.insertionSort(&arr2);  print(\"插入排序:\", arr2)\n        var arr3 = data; s.selectionSort(&arr3);  print(\"选择排序:\", arr3)\n        var arr4 = data; s.shellSort(&arr4);      print(\"希尔排序:\", arr4)\n        var arr5 = data; s.mergeSort(&arr5);      print(\"归并排序:\", arr5)\n        var arr6 = data; s.quickSort(&arr6);      print(\"快速排序:\", arr6)\n        var arr7 = data; s.heapSort(&arr7);       print(\"堆排序:  \", arr7)\n    }\n}\n\n// 直接以 swift SortingAlgorithms.swift 方式运行时执行演示\n#if !canImport(Darwin) || true\nSortingAlgorithms.runDemo()\n#endif\n"
+            },
+            "_meta": {
+              "goose": {
+                "toolCall": {
+                  "toolName": "write"
+                }
+              },
+              "agnes": {
+                "created": 1793064135,
+                "messageId": "d6d29d19b35947608172b1888ec1e666"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "tool_call_update",
+            "toolCallId": "call_0f51945b69394217815ac996",
+            "status": "completed",
+            "content": [
+              {
+                "type": "content",
+                "content": {
+                  "type": "text",
+                  "text": "Updated (97 chars)"
+                }
+              }
+            ],
+            "_meta": {
+              "agnes": {
+                "created": 1793064109,
+                "messageId": "msg_7d2efa05-0219-44f1-b5ac-539a57542562"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "agent_message_chunk",
+            "content": {
+              "type": "text",
+              "text": "文件已创建，现在做语法校验。先去掉演示里的尾部重复执行风险并检查编译。\n\n"
+            },
+            "messageId": "1b3b958606334d2e99f3c1841dcf291b",
+            "_meta": {
+              "agnes": {
+                "created": 1793064139,
+                "messageId": "1b3b958606334d2e99f3c1841dcf291b"
+              }
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "message_usage",
+            "messageId": "ea87a3016f974f789669d2fa1495621c",
+            "usage": {
+              "inputTokens": 34684,
+              "outputTokens": 101,
+              "totalTokens": 34785,
+              "cacheReadTokens": 34048,
+              "elapsedMs": 2083,
+              "timeToFirstTokenMs": 1191,
+              "isCompaction": false
+            }
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "20261027_3",
+          "update": {
+            "sessionUpdate": "message_model",
+            "messageId": "ea87a3016f974f789669d2fa1495621c",
+            "modelId": "auto"
+          }
+        }
+      },
+      {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "20261028_4",
+          "update": {
+            "sessionUpdate": "config_option_update",
+            "configOptions": [
+              {
+                "id": "provider",
+                "name": "Provider",
+                "type": "select",
+                "currentValue": "agnes",
+                "options": [
+                  {
+                    "value": "goose",
+                    "name": "Agnes (Default)"
+                  },
+                  {
+                    "value": "agnes",
+                    "name": "Agnes"
+                  },
+                  {
+                    "value": "alibaba",
+                    "name": "Alibaba (Qwen)"
+                  },
+                  {
+                    "value": "amp-acp",
+                    "name": "Amp"
+                  },
+                  {
+                    "value": "anthropic",
+                    "name": "Anthropic"
+                  },
+                  {
+                    "value": "atomic_chat",
+                    "name": "Atomic Chat"
+                  },
+                  {
+                    "value": "avian",
+                    "name": "Avian"
+                  },
+                  {
+                    "value": "aws_bedrock",
+                    "name": "Amazon Bedrock"
+                  },
+                  {
+                    "value": "azure_foundry",
+                    "name": "Azure AI Foundry"
+                  },
+                  {
+                    "value": "azure_openai",
+                    "name": "Azure OpenAI"
+                  },
+                  {
+                    "value": "celeris",
+                    "name": "Celeris"
+                  },
+                  {
+                    "value": "cerebras",
+                    "name": "Cerebras"
+                  },
+                  {
+                    "value": "chatgpt_codex",
+                    "name": "ChatGPT Codex"
+                  },
+                  {
+                    "value": "claude-acp",
+                    "name": "Claude Code"
+                  },
+                  {
+                    "value": "claude-code",
+                    "name": "Claude Code CLI"
+                  },
+                  {
+                    "value": "codex",
+                    "name": "OpenAI Codex CLI"
+                  },
+                  {
+                    "value": "codex-acp",
+                    "name": "Codex CLI"
+                  },
+                  {
+                    "value": "copilot-acp",
+                    "name": "GitHub Copilot CLI (ACP)"
+                  },
+                  {
+                    "value": "cursor-agent",
+                    "name": "Cursor Agent"
+                  },
+                  {
+                    "value": "custom_deepseek",
+                    "name": "DeepSeek"
+                  },
+                  {
+                    "value": "custom_tensorix",
+                    "name": "Tensorix"
+                  },
+                  {
+                    "value": "databricks",
+                    "name": "Databricks"
+                  },
+                  {
+                    "value": "databricks_v2",
+                    "name": "Databricks AI Gateway"
+                  },
+                  {
+                    "value": "empiriolabs",
+                    "name": "EmpirioLabs AI"
+                  },
+                  {
+                    "value": "fireworks-ai",
+                    "name": "Fireworks AI"
+                  },
+                  {
+                    "value": "friendli",
+                    "name": "Friendli AI"
+                  },
+                  {
+                    "value": "futurmix",
+                    "name": "FuturMix"
+                  },
+                  {
+                    "value": "gcp_vertex_ai",
+                    "name": "GCP Vertex AI"
+                  },
+                  {
+                    "value": "gemini-cli",
+                    "name": "Gemini CLI"
+                  },
+                  {
+                    "value": "gemini_oauth",
+                    "name": "Gemini"
+                  },
+                  {
+                    "value": "github_copilot",
+                    "name": "GitHub Copilot"
+                  },
+                  {
+                    "value": "google",
+                    "name": "Google Gemini (API Key)"
+                  },
+                  {
+                    "value": "groq",
+                    "name": "Groq"
+                  },
+                  {
+                    "value": "huggingface",
+                    "name": "Hugging Face"
+                  },
+                  {
+                    "value": "iflytek",
+                    "name": "iFlytek Spark"
+                  },
+                  {
+                    "value": "iflytek_astron",
+                    "name": "iFlytek Astron MaaS"
+                  },
+                  {
+                    "value": "inception",
+                    "name": "Inception"
+                  },
+                  {
+                    "value": "kimi_code",
+                    "name": "Kimi Code"
+                  },
+                  {
+                    "value": "litellm",
+                    "name": "LiteLLM"
+                  },
+                  {
+                    "value": "llama_swap",
+                    "name": "Llama Swap"
+                  },
+                  {
+                    "value": "lmstudio",
+                    "name": "LM Studio"
+                  },
+                  {
+                    "value": "local",
+                    "name": "Local Inference"
+                  },
+                  {
+                    "value": "meta",
+                    "name": "Meta"
+                  },
+                  {
+                    "value": "minimax",
+                    "name": "MiniMax"
+                  },
+                  {
+                    "value": "mistral",
+                    "name": "Mistral AI"
+                  },
+                  {
+                    "value": "moonshot",
+                    "name": "Moonshot"
+                  },
+                  {
+                    "value": "nano-gpt",
+                    "name": "NanoGPT"
+                  },
+                  {
+                    "value": "nearai",
+                    "name": "NEAR AI Cloud"
+                  },
+                  {
+                    "value": "novita",
+                    "name": "Novita AI"
+                  },
+                  {
+                    "value": "nvidia",
+                    "name": "NVIDIA"
+                  },
+                  {
+                    "value": "ollama",
+                    "name": "Ollama"
+                  },
+                  {
+                    "value": "ollama_cloud",
+                    "name": "Ollama Cloud"
+                  },
+                  {
+                    "value": "omlx",
+                    "name": "oMLX"
+                  },
+                  {
+                    "value": "openai",
+                    "name": "OpenAI"
+                  },
+                  {
+                    "value": "opencode_go",
+                    "name": "OpenCode Go"
+                  },
+                  {
+                    "value": "openrouter",
+                    "name": "OpenRouter"
+                  },
+                  {
+                    "value": "orcarouter",
+                    "name": "OrcaRouter"
+                  },
+                  {
+                    "value": "ovhcloud",
+                    "name": "OVHcloud"
+                  },
+                  {
+                    "value": "perplexity",
+                    "name": "Perplexity"
+                  },
+                  {
+                    "value": "pi-acp",
+                    "name": "Pi"
+                  },
+                  {
+                    "value": "routstr",
+                    "name": "Routstr"
+                  },
+                  {
+                    "value": "sagemaker_tgi",
+                    "name": "Amazon SageMaker TGI"
+                  },
+                  {
+                    "value": "sakana",
+                    "name": "Sakana AI"
+                  },
+                  {
+                    "value": "saladcloud",
+                    "name": "SaladCloud AI Gateway"
+                  },
+                  {
+                    "value": "scaleway",
+                    "name": "Scaleway"
+                  },
+                  {
+                    "value": "snowflake",
+                    "name": "Snowflake"
+                  },
+                  {
+                    "value": "tanzu_ai",
+                    "name": "VMware Tanzu Platform"
+                  },
+                  {
+                    "value": "tetrate",
+                    "name": "Tetrate Agent Router Service"
+                  },
+                  {
+                    "value": "together",
+                    "name": "Together AI"
+                  },
+                  {
+                    "value": "venice",
+                    "name": "Venice.ai"
+                  },
+                  {
+                    "value": "vercel_ai_gateway",
+                    "name": "Vercel AI Gateway"
+                  },
+                  {
+                    "value": "xai",
+                    "name": "xAI"
+                  },
+                  {
+                    "value": "xai_oauth",
+                    "name": "xAI (SuperGrok Subscription)"
+                  },
+                  {
+                    "value": "zai",
+                    "name": "Z.AI"
+                  },
+                  {
+                    "value": "zhipu",
+                    "name": "Zhipu AI"
+                  }
+                ]
+              },
+              {
+                "id": "mode",
+                "name": "Mode",
+                "category": "mode",
+                "type": "select",
+                "currentValue": "approve",
+                "options": [
+                  {
+                    "value": "auto",
+                    "name": "auto",
+                    "description": "Automatically run allowed tools; write/edit outside the current workspace fail without approval (trusted environments only)"
+                  },
+                  {
+                    "value": "approve",
+                    "name": "approve",
+                    "description": "Ask before every tool call"
+                  },
+                  {
+                    "value": "smart_approve",
+                    "name": "smart_approve",
+                    "description": "Run verified read-only tools; ask before sensitive or modifying calls"
+                  },
+                  {
+                    "value": "plan",
+                    "name": "plan",
+                    "description": "Explore with verified read-only tools; block all modifying calls"
+                  },
+                  {
+                    "value": "chat",
+                    "name": "chat",
+                    "description": "Chat only, no tool calls"
+                  }
+                ]
+              },
+              {
+                "id": "model",
+                "name": "Model",
+                "category": "model",
+                "type": "select",
+                "currentValue": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "name": "auto"
+                  },
+                  {
+                    "value": "agnes-3.0-flash",
+                    "name": "agnes-3.0-flash"
+                  },
+                  {
+                    "value": "agnes-2.5-flash",
+                    "name": "agnes-2.5-flash"
+                  },
+                  {
+                    "value": "agnes-2.5-pro",
+                    "name": "agnes-2.5-pro"
+                  },
+                  {
+                    "value": "deepseek-v4-flash",
+                    "name": "DeepSeek V4 Flash"
+                  },
+                  {
+                    "value": "deepseek-v4.1-flash",
+                    "name": "deepseek-v4.1-flash"
+                  },
+                  {
+                    "value": "glm-5.3",
+                    "name": "glm-5.3"
+                  },
+                  {
+                    "value": "glm-5.2",
+                    "name": "glm-5.2"
+                  },
+                  {
+                    "value": "kimi-k3",
+                    "name": "kimi-k3"
+                  },
+                  {
+                    "value": "deepseek-v4-pro",
+                    "name": "DeepSeek V4 Pro"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "warnings": [
+      "缺少逐帧采集时间；生成脚本采用人为间隔，不代表真实延迟。",
+      "混有多个会话；通知须按场景选择，不能推断为同一次调用。"
+    ]
+  }
+]

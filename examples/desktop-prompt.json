@@ -1,0 +1,147 @@
+{
+  "format": "acp-studio/v1",
+  "method": "session/prompt",
+  "warnings": [
+    "由真实通知片段组装的展示场景；人工 0.3 秒间隔，不是原始完整事务。",
+    "仅选取存在结束事件的工具调用；模型/用量事件关联到本轮示例助手消息。"
+  ],
+  "frames": [
+    {
+      "offset": 0.3,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "tool_call",
+            "toolCallId": "$identity:toolCallId:call_0f51945b69394217815ac996",
+            "title": "todo: todo write",
+            "rawInput": {
+              "content": "- [x] 需求：生成排序算法 Swift 文件\n- [ ] 检查目标目录及同名文件\n- [ ] 编写 Swift 排序算法文件\n- [ ] 做语法/本地编译校验\n- [ ] 登记并交付用户文件"
+            },
+            "_meta": {
+              "goose": {
+                "toolCall": {
+                  "toolName": "todo__todo_write",
+                  "extensionName": "todo"
+                }
+              },
+              "agnes": {
+                "created": 1793064109,
+                "messageId": "$identity:messageId:5bc11ba96681401c88a5619c1bd61fa8"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 0.6,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "tool_call_update",
+            "toolCallId": "$identity:toolCallId:call_0f51945b69394217815ac996",
+            "status": "completed",
+            "content": [
+              {
+                "type": "content",
+                "content": {
+                  "type": "text",
+                  "text": "Updated (97 chars)"
+                }
+              }
+            ],
+            "_meta": {
+              "agnes": {
+                "created": 1793064109,
+                "messageId": "$identity:messageId:msg_7d2efa05-0219-44f1-b5ac-539a57542562"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 0.9,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "agent_message_chunk",
+            "content": {
+              "type": "text",
+              "text": "文件已创建，现在做语法校验。先去掉演示里的尾部重复执行风险并检查编译。\n\n"
+            },
+            "messageId": "$agentMessageId",
+            "_meta": {
+              "agnes": {
+                "created": 1793064139,
+                "messageId": "$agentMessageId"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 1.2,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "message_usage",
+            "messageId": "$agentMessageId",
+            "usage": {
+              "inputTokens": 34684,
+              "outputTokens": 101,
+              "totalTokens": 34785,
+              "cacheReadTokens": 34048,
+              "elapsedMs": 2083,
+              "timeToFirstTokenMs": 1191,
+              "isCompaction": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 1.5,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "message_model",
+            "messageId": "$agentMessageId",
+            "modelId": "auto"
+          }
+        }
+      }
+    },
+    {
+      "offset": 1.8,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": "$rpcId",
+        "result": {
+          "stopReason": "end_turn",
+          "usage": {
+            "totalTokens": 34730,
+            "inputTokens": 34602,
+            "outputTokens": 128
+          }
+        }
+      }
+    }
+  ]
+}

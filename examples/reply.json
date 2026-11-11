@@ -1,0 +1,55 @@
+{
+  "format": "acp-studio/v1",
+  "method": "session/prompt",
+  "frames": [
+    {
+      "offset": 0.3,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "agent_message_chunk",
+            "messageId": "$agentMessageId",
+            "content": { "type": "text", "text": "## ACP Studio\n\n" }
+          }
+        }
+      }
+    },
+    {
+      "offset": 1,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "agent_message_chunk",
+            "messageId": "$agentMessageId",
+            "content": { "type": "text", "text": "这条回复通过 **iroh / QUIC** 从本机 Studio 发来。\n\n" }
+          }
+        }
+      }
+    },
+    {
+      "offset": 1.8,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "agent_message_chunk",
+            "messageId": "$agentMessageId",
+            "content": { "type": "text", "text": "- 无 BFF 授权与续租\n- 无 Relay\n- 可编辑 JSON 并重复回放\n" }
+          }
+        }
+      }
+    },
+    {
+      "offset": 2,
+      "message": { "jsonrpc": "2.0", "id": "$rpcId", "result": { "stopReason": "end_turn" } }
+    }
+  ]
+}

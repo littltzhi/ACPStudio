@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="studio-key" content="__KEY__"><title>ACP Studio · Local Desktop</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body><header><div class="brand"><b>ACP</b><div><h1>Studio</h1><span>LOCAL DESKTOP · IROH / QUIC</span></div></div><div id="status">正在启动</div></header>
+<main><section class="pair"><div><h2>连接 App</h2><p>Debug → ACP Studio → 粘贴配对 JSON → 连接。<br>无需 BFF、Relay 或已登录账号。</p><button id="copy">复制配对 JSON</button></div><pre id="pairing">等待 iroh 端点…</pre></section>
+<section class="bar"><label>响应模式 <select id="mode"><option value="mock">内置 Mock</option><option value="replay">JSON / 历史回放</option></select></label><label>回放速度 <select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="0">即时</option></select></label><span id="notice">每轮 ACP 交互会自动录制</span><button id="import">导入 JSON</button><input id="file" type="file" accept=".json" hidden><button id="export">导出 JSON</button><button id="apply" class="primary">应用到后续请求</button></section>
+<div class="workspace"><aside><h2>历史回放</h2><div id="records"></div><p>点击记录载入编辑器。<br>选择“JSON / 历史回放”后应用。</p></aside><article><h2>回复脚本 <span>session/prompt</span></h2><textarea id="editor" spellcheck="false" aria-label="回复 JSON"></textarea><p>占位符：$rpcId、$sessionId、$requestId、$messageId、$agentMessageId。最后一帧必须为 RPC 响应。</p></article><article><h2>双向 ACP 消息 <span id="count">0</span></h2><div id="events"></div></article></div>
+<footer>本地测试端点 · 配对公钥和口令每次启动更换 · 仅基础文本会话，不执行真实工具</footer></main></body></html>
