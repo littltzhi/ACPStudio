@@ -25,18 +25,19 @@ class Studio:
         self.pairing = None
         self.peers = set()
         self.events = deque(maxlen=250)
-        self.mode, self.speed = "mock", 1
+        self.speed = 1
         self.rules, self.active = {}, {}
+        self.notification_rules = {}
         self.workers = set()
-        self.journal = (data / f"traffic-{time.time_ns()}.jsonl").open("a", encoding="utf-8")
         self.last_error = ""
         self.stopping = threading.Event()
         self.agent = MockAgent(data, catalog or [])
         settings = data / "settings.json"
         if settings.exists():
             saved = json.loads(settings.read_text())
-            self.mode, self.speed = saved["mode"], saved["speed"]
+            self.speed = saved["speed"]
             self.rules = {method: scenario(rule) for method, rule in saved["rules"].items()}
+            self.notification_rules = {name: scenario(rule) for name, rule in saved.get("notifications", {}).items()}
 
     def send(self, connection, message):
         with self.write_lock:
@@ -44,32 +45,33 @@ class Studio:
                 raise RuntimeError("iroh 进程已退出")
             self.process.stdin.write(json.dumps({"connection": connection, "message": message}) + "\n")
             self.process.stdin.flush()
-        self.record(connection, "out", message)
+        self.log_event(connection, "out", message)
 
-    def record(self, connection, direction, message):
+    def log_event(self, connection, direction, message):
         event = {"time": time.time(), "connection": connection, "direction": direction, "message": message}
         with self.lock:
             self.events.append(event)
-            self.journal.write(json.dumps(event, ensure_ascii=False) + "\n")
-            self.journal.flush()
 
     def default_rule(self, method):
         if method == "session/prompt":
             path = self.root / "examples/desktop-prompt.json"
-            return scenario((path if self.agent.catalog and path.exists() else self.root / "examples/reply.json").read_text())
+            return scenario((path if self.agent.catalog and self.agent.definition["models"] and path.exists()
+                             else self.root / "examples/reply.json").read_text())
+        if method in METHODS and method not in STATEFUL and method != "_agnes/unstable/remote/session/capabilities/list":
+            result, _ = self.agent.handle(method, {"sessionId": "$sessionId"})
+            return {"format": "acp-studio/v1", "method": method, "frames": [
+                {"offset": 0, "message": {"jsonrpc": "2.0", "id": "$rpcId", "result": result}}]}
         return {"format": "acp-studio/v1", "method": method, "frames": [
             {"offset": 0, "message": "$notifications"},
             {"offset": 0, "message": {"jsonrpc": "2.0", "id": "$rpcId", "result": "$result"}}]}
 
     def snapshot(self):
         with self.lock:
-            records = sorted(self.data.glob("record-*.json"), reverse=True)[:100]
-            return {"pairing": self.pairing, "peers": len(self.peers), "connections": sorted(self.peers),
-                    "mode": self.mode, "speed": self.speed, "events": list(self.events), "error": self.last_error,
+            return {"apiVersion": 2, "pairing": self.pairing, "peers": len(self.peers), "connections": sorted(self.peers),
+                    "speed": self.speed, "events": list(self.events), "error": self.last_error,
                     "methods": sorted(set(METHODS) | self.rules.keys()), "overrides": list(self.rules),
                     "sessions": [{"sessionId": identity, "title": item["record"].get("title", identity)}
                                  for identity, item in self.agent.sessions.items()],
-                    "records": [{"id": path.stem, "name": path.stem} for path in records],
                     "sources": [{"name": item["source"], "warnings": item["warnings"]} for item in self.agent.catalog]}
 
     def reader(self):
@@ -91,7 +93,7 @@ class Studio:
                             if turn["connection"] == connection:
                                 turn["cancel"].set()
                     elif event["kind"] == "message":
-                        self.record(connection, "in", event["message"])
+                        self.log_event(connection, "in", event["message"])
                         self.handle(connection, event["message"])
             except Exception as error:
                 self.last_error = str(error)
@@ -103,6 +105,7 @@ class Studio:
         session_id = params.get("sessionId") or (result.get("sessionId") if isinstance(result, dict) else None)
         session = self.agent.sessions.get(session_id, {})
         return {"$rpcId": request.get("id"), "$params": params, "$result": result, "$notifications": notifications,
+                "$config": {option["id"]: option["currentValue"] for option in session.get("configOptions", [])},
                 "$sessionId": session_id, "$cwd": session.get("record", {}).get("cwd", params.get("cwd", "/studio")),
                 "$requestId": (entry or {}).get("requestId", params.get("requestId", str(uuid.uuid4()))),
                 "$messageId": (entry or {}).get("messageId", params.get("messageId", str(uuid.uuid4()))),
@@ -132,7 +135,7 @@ class Studio:
             try:
                 if not isinstance(params, dict):
                     raise RPCError("params 必须是对象")
-                rule = copy.deepcopy(self.rules.get(method)) if self.mode == "replay" else None
+                rule = copy.deepcopy(self.rules.get(method))
                 speed = self.speed
                 scripted_error = rule and any("error" in frame["message"] for frame in rule["frames"]
                                               if isinstance(frame.get("message"), dict))
@@ -167,10 +170,9 @@ class Studio:
                 response = {"jsonrpc": "2.0", "id": request["id"], "error": {
                     "code": error.code if isinstance(error, RPCError) else -32602, "message": str(error)}}
                 self.send(connection, response)
-                self.save_record(request, [{"offset": 0, "message": {**response, "id": "$rpcId"}}])
 
     def play(self, connection, request, rule, variables, speed, turn=None):
-        started, recorded, replied = time.monotonic(), [], False
+        started, replied = time.monotonic(), False
         session_id = variables.get("$sessionId")
         history_sequences = []
         def bind_identities(value):
@@ -185,16 +187,6 @@ class Studio:
                     saved = self.agent.sessions[session_id].setdefault("notificationIdentities", {}) if rule.get("kind") == "notification" and session_id in self.agent.sessions else variables
                     variables[value] = saved.setdefault(value, str(uuid.uuid4()))
         bind_identities(rule["frames"])
-        reverse = {value: key for key, value in variables.items() if key not in ("$rpcId", "$cwd")
-                   and isinstance(value, str) and value}
-
-        def portable(value):
-            if isinstance(value, dict):
-                return {key: portable(item) for key, item in value.items()}
-            if isinstance(value, list):
-                return [portable(item) for item in value]
-            return reverse.get(value, value) if isinstance(value, str) else value
-
         def emit(message, ingest=True):
             nonlocal replied
             with self.lock:
@@ -204,11 +196,8 @@ class Studio:
                 if ingest and request["method"] not in ("session/load", EXT + "session/history/load") and session_id in self.agent.sessions and "method" in message:
                     self.agent.ingest(message, session_id)
                 self.send(connection, message)
-                saved = portable(message)
-                if "id" in saved:
-                    saved["id"] = "$rpcId"
+                if "id" in message:
                     replied = True
-                recorded.append({"offset": time.monotonic() - started, "message": saved})
 
         try:
             if turn:
@@ -223,11 +212,16 @@ class Studio:
                     if message.get("method") and message.get("params", {}).get("sessionId") not in (None, session_id):
                         raise RPCError("脚本通知 sessionId 与当前请求不符；请使用 $sessionId")
                     if request["method"] == "session/new" and "result" in message:
-                        message["result"]["sessionId"] = session_id
+                        if not isinstance(message["result"], dict) or message["result"].get("sessionId") != session_id:
+                            raise RPCError("session/new 的 result.sessionId 必须使用 $sessionId，以关联当前模拟会话")
                     if request["method"] == EXT + "session/history/load" and "result" in message:
-                        if history_sequences != list(range(variables["$result"]["updateCount"])):
-                            raise RPCError("历史通知与当前页不一致；请使用 $notifications 和 $result")
-                        message["result"] = variables["$result"]
+                        result = message["result"]
+                        if not isinstance(result, dict) or result.get("pageId") != variables["$pageId"]:
+                            raise RPCError("历史响应的 pageId 必须使用 $pageId")
+                        if type(result.get("updateCount")) is not int or result["updateCount"] != len(history_sequences):
+                            raise RPCError("历史响应的 updateCount 必须等于本脚本已发送的 history_replay 通知数")
+                        if history_sequences != list(range(len(history_sequences))):
+                            raise RPCError("历史通知的 sequence 必须从 0 开始连续递增")
                     if request["method"] == EXT + "session/history/load" and "method" in message:
                         update = message.get("params", {}).get("update", {})
                         if update.get("sessionUpdate") == "history_replay":
@@ -255,37 +249,38 @@ class Studio:
                 if turn:
                     self.active.pop((turn["entry"]["sessionId"], turn["entry"]["requestId"]), None)
                 self.agent.save()
-            if recorded:
-                self.save_record(request, recorded)
-
-    def save_record(self, request, frames):
-        document = {"format": "acp-studio/v1", "method": request["method"], "frames": frames}
-        if "id" not in request:
-            document["kind"] = "notification"
-        elif request["method"] in STATEFUL and not any("error" in frame["message"] for frame in frames):
-            document["capturedFrames"] = frames
-            document["warnings"] = ["原始消息保存在 capturedFrames；回放默认根据当前会话状态生成响应，避免旧 ID、游标和队列污染。"]
-            document["frames"] = [
-                {"offset": frames[0]["offset"], "message": "$notifications"},
-                {"offset": frames[-1]["offset"], "message": {"jsonrpc": "2.0", "id": "$rpcId", "result": "$result"}}]
-        (self.data / f"record-{time.time_ns()}.json").write_text(json.dumps(document, ensure_ascii=False, indent=2))
 
     def configure(self, data):
         rule = scenario(data["scenario"])
         if rule.get("kind") == "notification":
             raise ValueError("独立通知请使用发送通知按钮，或将帧加入请求脚本")
-        if data["mode"] not in ("mock", "replay") or data["speed"] not in (0, .5, 1, 2, 4):
-            raise ValueError("模式或速度无效")
+        if data["speed"] not in (0, .5, 1, 2, 4):
+            raise ValueError("发送速度无效")
         with self.lock:
             self.rules[rule["method"]] = rule
-            self.mode, self.speed = data["mode"], data["speed"]
+            self.speed = data["speed"]
             self.save_settings()
 
     def save_settings(self):
         path = self.data / "settings.json"
         temporary = path.with_suffix(".tmp")
-        temporary.write_text(json.dumps({"rules": self.rules, "mode": self.mode, "speed": self.speed}, ensure_ascii=False))
+        temporary.write_text(json.dumps({"rules": self.rules, "notifications": self.notification_rules,
+                                         "speed": self.speed}, ensure_ascii=False))
         temporary.replace(path)
+
+    def samples(self):
+        with self.lock:
+            samples = {rule["name"]: rule for rule in self.agent.samples}
+            samples.update(self.notification_rules)
+            return list(samples.values())
+
+    def save_sample(self, data):
+        rule = scenario(data["scenario"])
+        if rule.get("kind") != "notification" or not isinstance(rule.get("name"), str) or not rule["name"].strip():
+            raise ValueError("通知样例需要 kind: notification 和非空 name；同名保存覆盖，修改 name 可另存")
+        with self.lock:
+            self.notification_rules[rule["name"]] = rule
+            self.save_settings()
 
     def notify(self, data):
         rule = scenario(data["scenario"])
@@ -346,16 +341,31 @@ class Handler(BaseHTTPRequestHandler):
                 self.response(content, content_type={"index.html": "text/html", "app.js": "text/javascript", "style.css": "text/css"}[name])
             elif self.command == "GET" and path == "/api/state":
                 self.response(app.snapshot())
+            elif self.command == "GET" and path == "/api/agent-data":
+                with app.lock:
+                    self.response(app.agent.definition)
+            elif self.command == "POST" and path == "/api/agent-data":
+                with app.lock:
+                    app.agent.configure(data)
+                    app.agent.save()
+                    self.response(app.agent.definition)
+            elif self.command == "GET" and path == "/api/session-data":
+                identity = parse_qs(url.query).get("sessionId", [None])[0]
+                with app.lock:
+                    self.response(app.agent.session_data(identity))
+            elif self.command == "POST" and path == "/api/session-data":
+                with app.lock:
+                    result = app.agent.configure_session(data)
+                    app.agent.save()
+                    self.response(result)
             elif self.command == "GET" and path == "/api/rule":
                 method = parse_qs(url.query)["method"][0]
                 self.response(app.rules.get(method) or app.default_rule(method))
             elif self.command == "GET" and path == "/api/samples":
-                self.response(app.agent.samples)
-            elif self.command == "GET" and path.startswith("/api/records/"):
-                name = path.split("/")[-1]
-                if not name.startswith("record-") or not name[7:].isdigit():
-                    raise ValueError("录制 ID 无效")
-                self.response(json.loads((app.data / f"{name}.json").read_text()))
+                self.response(app.samples())
+            elif self.command == "POST" and path == "/api/samples":
+                app.save_sample(data)
+                self.response({"ok": True})
             elif self.command == "POST" and path == "/api/settings":
                 app.configure(data)
                 self.response({"ok": True})
@@ -366,9 +376,17 @@ class Handler(BaseHTTPRequestHandler):
                 self.response(app.default_rule(data["method"]))
             elif self.command == "POST" and path == "/api/import":
                 try:
-                    rule = scenario(json.loads(data["text"]))
+                    value = json.loads(data["text"])
                 except (ValueError, TypeError):
                     rule = document_scenario(extract_document(data["text"], data.get("name", "import")))
+                else:
+                    if isinstance(value, dict) and value.get("format") == "acp-studio/v1":
+                        rule = scenario(value)
+                    elif isinstance(value, dict) and value.get("jsonrpc") == "2.0":
+                        rule = document_scenario(extract_document(data["text"], data.get("name", "import")))
+                    else:
+                        rule = scenario({"format": "acp-studio/v1", "method": data["method"], "frames": [
+                            {"offset": 0, "message": {"jsonrpc": "2.0", "id": "$rpcId", "result": value}}]})
                 self.response(rule)
             elif self.command == "POST" and path == "/api/notify":
                 app.notify(data)
@@ -426,7 +444,6 @@ def main():
             worker.join(timeout=5)
         process.terminate()
         process.wait(timeout=5)
-        app.journal.close()
         server.server_close()
 
 

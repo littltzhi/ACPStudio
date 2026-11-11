@@ -42,7 +42,7 @@
           "update": {
             "sessionUpdate": "agent_message_chunk",
             "messageId": "$agentMessageId",
-            "content": { "type": "text", "text": "- 无 BFF 授权与续租\n- 无 Relay\n- 可编辑 JSON 并重复回放\n" }
+            "content": { "type": "text", "text": "- 无 BFF 授权与续租\n- 无 Relay\n- 可按接口编辑 JSON 响应\n" }
           }
         }
       }

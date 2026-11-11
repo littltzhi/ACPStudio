@@ -1,0 +1,46 @@
+{
+  "format": "acp-studio/v1",
+  "method": "_agnes/unstable/session/history/load",
+  "frames": [
+    {
+      "offset": 0,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "_agnes/unstable/session/update",
+        "params": {
+          "sessionId": "$sessionId",
+          "update": {
+            "sessionUpdate": "history_replay",
+            "pageId": "$pageId",
+            "sequence": 0,
+            "update": {
+              "sessionUpdate": "agent_message_chunk",
+              "messageId": "studio-history-example",
+              "content": {
+                "type": "text",
+                "text": "这是可编辑的历史消息样例。"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 0.1,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": "$rpcId",
+        "result": {
+          "pageId": "$pageId",
+          "nextCursor": null,
+          "hasMore": false,
+          "returnedMessages": 1,
+          "totalVisibleMessages": 1,
+          "updateCount": 1,
+          "promptRequests": [],
+          "messageModels": []
+        }
+      }
+    }
+  ]
+}

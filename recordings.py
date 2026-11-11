@@ -72,7 +72,7 @@ def scenario(value):
             raise ValueError("每个 message 都需要 jsonrpc: 2.0")
         if "id" in message:
             if "method" in message or message["id"] != "$rpcId" or ("result" in message) == ("error" in message):
-                raise ValueError("响应需要 id: $rpcId 和 result/error；暂不支持反向 request 回放")
+                raise ValueError("响应需要 id: $rpcId 和 result/error；暂不支持反向 request 模拟")
             replies += 1
         elif not isinstance(message.get("method"), str) or not isinstance(message.get("params"), dict):
             raise ValueError("通知需要 method 和对象 params")
@@ -93,11 +93,12 @@ def substitute(value, variables):
         return value
     if value in variables:
         return copy.deepcopy(variables[value])
-    if value.startswith("$params."):
-        result = variables.get("$params", {})
-        for part in value[8:].split("."):
+    if value.startswith(("$params.", "$config.")):
+        variable, path = value.split(".", 1)
+        result = variables.get(variable, {})
+        for part in path.split("."):
             if not isinstance(result, dict) or part not in result:
-                raise ValueError(f"请求缺少字段 {value}")
+                raise ValueError(f"变量缺少字段 {value}")
             result = result[part]
         return copy.deepcopy(result)
     return value
@@ -173,6 +174,8 @@ def desktop_prompt(catalog):
             chosen.append(normalize(message, identities=identities))
         elif kind in ("agent_message_chunk", "message_usage", "message_model"):
             adjusted = normalize(message, identities=identities)
+            if kind == "message_model":
+                adjusted["params"]["update"]["modelId"] = "$config.model"
             def rewrite(value):
                 if isinstance(value, dict):
                     return {key: "$agentMessageId" if key == "messageId" else rewrite(item) for key, item in value.items()}

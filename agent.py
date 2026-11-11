@@ -48,10 +48,12 @@ class MockAgent:
         for document in catalog:
             if document["requests"] and document["responses"]:
                 self.templates[document["requests"][0]["method"]] = document["responses"][-1].get("result", {})
+        self.definition = self.initial_definition()
         self.sessions = {}
         self.prompts = {}
         if self.path.exists():
             state = json.loads(self.path.read_text())
+            self.definition = state.get("definition", self.definition)
             self.sessions, self.prompts = state["sessions"], state["prompts"]
             for entries in self.prompts.values():
                 for entry in entries.values():
@@ -59,11 +61,13 @@ class MockAgent:
                         entry.update(status="interrupted", error="Studio 已重启；不会自动重发")
         else:
             self.seed()
+        self.configure(self.definition)
         self.save()
 
     def save(self):
         temporary = self.path.with_suffix(".tmp")
-        temporary.write_text(json.dumps({"sessions": self.sessions, "prompts": self.prompts}, ensure_ascii=False))
+        temporary.write_text(json.dumps({"definition": self.definition, "sessions": self.sessions,
+                                         "prompts": self.prompts}, ensure_ascii=False))
         temporary.chmod(0o600)
         temporary.replace(self.path)
 
@@ -71,8 +75,144 @@ class MockAgent:
         return copy.deepcopy(self.templates.get(method, fallback))
 
     def default_configuration(self):
-        return self.template("session/new", {"configOptions": [], "modes": {
-            "currentModeId": "default", "availableModes": [{"id": "default", "name": "Studio"}]}})
+        return self.configuration(self.definition)
+
+    def initial_definition(self):
+        models = self.template(REMOTE + "models/list", {"models": [], "defaultModel": None})
+        projects = self.template(REMOTE + "projects/list", {"projects": [], "temporaryWorkingDir": "/studio"})
+        configuration = self.template("session/new", {"configOptions": [
+            {"id": "mode", "name": "Mode", "type": "select", "currentValue": "default",
+             "options": [{"value": "default", "name": "Studio"}]}]})
+        options = []
+        for option in configuration.get("configOptions", []):
+            if option["id"] not in ("provider", "model"):
+                option["defaultValue"] = option.pop("currentValue")
+                options.append(option)
+        return {"configOptions": options, "models": models["models"], "defaultModel": models.get("defaultModel"),
+                "projects": projects["projects"], "temporaryWorkingDir": projects["temporaryWorkingDir"],
+                "capabilities": self.template(REMOTE + "capabilities/list", {"plugins": [], "connectors": [], "skills": []})}
+
+    @staticmethod
+    def configuration(definition, values=None):
+        values = values or {}
+        options = []
+        models = definition["models"]
+        if models:
+            default = definition["defaultModel"]
+            providers = list(dict.fromkeys(model["providerId"] for model in models))
+            provider = values.get("provider", default["providerId"])
+            if provider not in providers:
+                provider = default["providerId"]
+            available = [model for model in models if model["providerId"] == provider]
+            model_id = values.get("model", default["modelId"])
+            if model_id not in [model["modelId"] for model in available]:
+                model_id = next((model["modelId"] for model in available if model["modelId"] == default["modelId"]),
+                                available[0]["modelId"])
+            options = [
+                {"id": "provider", "name": "Provider", "type": "select", "currentValue": provider,
+                 "options": [{"value": provider_id, "name": provider_id} for provider_id in providers]},
+                {"id": "model", "name": "Model", "category": "model", "type": "select", "currentValue": model_id,
+                 "options": [{"value": model["modelId"], "name": model["name"]} for model in available]}]
+        for template in definition["configOptions"]:
+            option = copy.deepcopy(template)
+            default = option.pop("defaultValue")
+            selected = values.get(option["id"], default)
+            option["currentValue"] = selected if selected in [item["value"] for item in option["options"]] else default
+            options.append(option)
+        mode = next((option for option in options if option["id"] == "mode"), None)
+        modes = {"currentModeId": mode["currentValue"] if mode else "default",
+                 "availableModes": [{"id": item["value"], **{key: value for key, value in item.items() if key != "value"}}
+                                    for item in mode["options"]] if mode else [{"id": "default", "name": "Studio"}]}
+        return {"configOptions": options, "modes": modes}
+
+    @staticmethod
+    def validate_definition(definition):
+        if not isinstance(definition, dict):
+            raise RPCError("Agent 数据必须是对象")
+        for key in ("models", "projects", "configOptions"):
+            if not isinstance(definition.get(key), list):
+                raise RPCError(f"{key} 必须是数组")
+        if not isinstance(definition.get("temporaryWorkingDir"), str) or not definition["temporaryWorkingDir"]:
+            raise RPCError("temporaryWorkingDir 不能为空")
+        capabilities = definition.get("capabilities")
+        if not isinstance(capabilities, dict) or any(not isinstance(capabilities.get(key), list)
+                                                   for key in ("plugins", "connectors", "skills")):
+            raise RPCError("capabilities 需要 plugins、connectors、skills 数组")
+        identities = set()
+        for model in definition["models"]:
+            if not isinstance(model, dict) or any(not isinstance(model.get(key), str) or not model[key]
+                                                 for key in ("providerId", "modelId", "name")):
+                raise RPCError("模型需要非空 providerId、modelId 和 name")
+            identity = (model["providerId"], model["modelId"])
+            if identity in identities:
+                raise RPCError("同一 providerId 下 modelId 不能重复")
+            identities.add(identity)
+        default = definition.get("defaultModel")
+        if identities and (not isinstance(default, dict) or (default.get("providerId"), default.get("modelId")) not in identities):
+            raise RPCError("defaultModel 必须引用 models 中的模型")
+        if not identities and default is not None:
+            raise RPCError("models 为空时 defaultModel 必须为 null")
+        project_ids = set()
+        for project in definition["projects"]:
+            if not isinstance(project, dict) or any(not isinstance(project.get(key), str) or not project[key]
+                                                   for key in ("id", "path", "name")):
+                raise RPCError("项目需要非空 id、path 和 name")
+            if project["id"] in project_ids:
+                raise RPCError("项目 id 不能重复")
+            project_ids.add(project["id"])
+        option_ids = {"provider", "model"}
+        for option in definition["configOptions"]:
+            if not isinstance(option, dict) or any(not isinstance(option.get(key), str) or not option[key]
+                                                  for key in ("id", "name")):
+                raise RPCError("配置项需要非空 id 和 name")
+            if option["id"] in option_ids:
+                raise RPCError("配置 id 不能重复；provider/model 由模型列表自动生成")
+            option_ids.add(option["id"])
+            choices = option.get("options")
+            if option.get("type") != "select" or not isinstance(choices, list) or not choices:
+                raise RPCError("配置项目前支持 type: select，options 不能为空")
+            if any(not isinstance(item, dict) or any(not isinstance(item.get(key), str) or not item[key]
+                                                    for key in ("value", "name")) for item in choices):
+                raise RPCError("每个配置选项需要非空 value 和 name")
+            choice_values = [item["value"] for item in choices]
+            if len(choice_values) != len(set(choice_values)) or option.get("defaultValue") not in choice_values:
+                raise RPCError("配置选项 value 不能重复，defaultValue 必须是其中一个值")
+
+    def configure(self, definition):
+        self.validate_definition(definition)
+        configurations = {identity: self.configuration(definition, {
+            option["id"]: option["currentValue"] for option in session["configOptions"]})
+            for identity, session in self.sessions.items()}
+        self.definition = copy.deepcopy(definition)
+        for identity, configuration in configurations.items():
+            self.sessions[identity].update(configuration)
+
+    def session_data(self, session_id=None):
+        if not session_id:
+            return {"sessionId": "", "title": "Studio 本地会话", "cwd": self.definition["temporaryWorkingDir"],
+                    "values": {option["id"]: option["currentValue"] for option in self.default_configuration()["configOptions"]}}
+        session = self.session(session_id)
+        return {"sessionId": session_id, "title": session["record"].get("title", ""),
+                "cwd": session["record"]["cwd"],
+                "values": {option["id"]: option["currentValue"] for option in session["configOptions"]}}
+
+    def configure_session(self, data):
+        if not isinstance(data, dict) or any(not isinstance(data.get(key), str) for key in ("sessionId", "title", "cwd")):
+            raise RPCError("会话数据需要 sessionId、title、cwd 字符串")
+        if not data["cwd"] or not isinstance(data.get("values"), dict):
+            raise RPCError("cwd 不能为空，values 必须是配置值对象")
+        identity = data["sessionId"] or "studio-" + str(uuid.uuid4())
+        values = self.session_data(identity)["values"] if identity in self.sessions else {}
+        values.update(data["values"])
+        configuration = self.configuration(self.definition, values)
+        actual = {option["id"]: option["currentValue"] for option in configuration["configOptions"]}
+        if any(key not in actual or actual[key] != value for key, value in data["values"].items()):
+            raise RPCError("values 包含未知配置或不支持的值；model 必须属于所选 provider")
+        if identity not in self.sessions:
+            self.add_session({"sessionId": identity, "cwd": data["cwd"], "title": data["title"]})
+        self.sessions[identity]["record"].update(cwd=data["cwd"], title=data["title"], updatedAt=utc_now())
+        self.sessions[identity].update(configuration)
+        return self.session_data(identity)
 
     def add_session(self, record):
         session_id = record["sessionId"]
@@ -210,13 +350,13 @@ class MockAgent:
         if method == "initialize":
             if params.get("protocolVersion", 1) != 1:
                 raise RPCError("仅支持 ACP protocolVersion 1")
-            return {"protocolVersion": 1, "agentInfo": {"name": "acp-studio", "version": "0.2.0"}, "authMethods": [],
+            return {"protocolVersion": 1, "agentInfo": {"name": "acp-studio", "version": "0.4.0"}, "authMethods": [],
                     "agentCapabilities": {"loadSession": True, "sessionCapabilities": {"list": {}},
                                           "_meta": {"agnes": {"remotePromptQueue": True}}}}, []
         if method == "session/new":
             session_id = "studio-" + str(uuid.uuid4())
             metadata = params.get("_meta", {})
-            session = self.add_session({"sessionId": session_id, "cwd": params.get("cwd") or "/studio",
+            session = self.add_session({"sessionId": session_id, "cwd": params.get("cwd") or self.definition["temporaryWorkingDir"],
                                         "title": "Studio 本地会话", "updatedAt": utc_now(), "_meta": metadata})
             mode = metadata.get("permissionMode")
             if mode:
@@ -272,10 +412,15 @@ class MockAgent:
             return {"modes": copy.deepcopy(self.session(session_id)["modes"] if session_id else self.default_configuration()["modes"])}, []
         if method == REMOTE + "session/capabilities/list":
             self.session(session_id)
-            return {"extensions": [], "skills": self.template(REMOTE + "capabilities/list", {}).get("skills", [])}, []
-        fallbacks = {REMOTE + "projects/list": {"projects": [], "temporaryWorkingDir": "/studio"},
-                     REMOTE + "models/list": {"models": []}, REMOTE + "capabilities/list": {"plugins": [], "connectors": [], "skills": []},
-                     REMOTE + "approvals/list": {"approvals": []}, REMOTE + "artifacts/list": {"files": []},
+            return {"extensions": [], "skills": copy.deepcopy(self.definition["capabilities"]["skills"])}, []
+        if method == REMOTE + "projects/list":
+            return copy.deepcopy({key: self.definition[key] for key in ("projects", "temporaryWorkingDir")}), []
+        if method == REMOTE + "models/list":
+            return {**copy.deepcopy({key: self.definition[key] for key in ("models", "defaultModel")}),
+                    "builtinError": None, "customError": None}, []
+        if method == REMOTE + "capabilities/list":
+            return copy.deepcopy(self.definition["capabilities"]), []
+        fallbacks = {REMOTE + "approvals/list": {"approvals": []}, REMOTE + "artifacts/list": {"files": []},
                      EXT + "session/message_feedback/list": {"sessionId": session_id, "feedback": []},
                      EXT + "sidebar/pins/get": {"revision": 0, "legacyImported": False, "pinnedSessionIds": [], "pinnedWorkspacePaths": []}}
         if method in fallbacks:
@@ -287,9 +432,9 @@ class MockAgent:
         option = next((item for item in session["configOptions"] if item["id"] == config_id), None)
         if option is None or value not in [item.get("value") for item in option.get("options", [])]:
             raise RPCError("未知配置或不支持的选项")
-        option["currentValue"] = value
-        if config_id == "mode":
-            session["modes"]["currentModeId"] = value
+        values = {item["id"]: item["currentValue"] for item in session["configOptions"]}
+        values[config_id] = value
+        session.update(self.configuration(self.definition, values))
 
     @staticmethod
     def public_entry(entry):
